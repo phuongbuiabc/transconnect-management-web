@@ -4,11 +4,11 @@ Independent React + Vite + TypeScript + Tailwind application for TransConnect ad
 
 ## Local setup
 
-Requires Node.js 24 or newer and npm. From this folder:
+Requires Node.js 22.14.0 or newer and npm. From this folder:
 
 ```powershell
 Copy-Item .env.example .env
-npm install
+npm ci
 npm run dev
 ```
 
@@ -22,7 +22,7 @@ The backend is a separate .NET 10 + SQL Server service. Follow its README to con
 - `npm run typecheck`: strict TypeScript validation.
 - `npm run build`: typecheck and production bundle.
 - `npm run preview`: inspect the built bundle locally.
-- `npm test`: focused Node 24 session/API regression tests.
+- `npm test`: focused Node session/API regression tests.
 
 ## Implemented scope
 
@@ -45,11 +45,15 @@ Both the InternalAdmin group and current `/auth/me` permission list gate access.
 
 ## Source layout
 
-- `src/lib/api.ts`: typed API envelope, errors and token lifecycle.
-- `src/auth.tsx`: current-user bootstrap and session provider.
-- `src/App.tsx`: routes, login, permission guard and shell.
-- `src/organizations.tsx`: organization list, detail and review.
-- `src/ui.tsx` and `src/styles.css`: shared feedback and responsive design tokens.
+See [ARCHITECTURE.md](ARCHITECTURE.md) and [AGENTS.md](AGENTS.md) for the feature boundaries and coding rules.
+
+- `src/app`: routes, guards and layouts.
+- `src/core`: configuration, transport/envelope, token/session lifecycle.
+- `src/features/auth` and `src/features/organizations`: API/model/hooks/pages/components.
+- `src/shared`: presentation components and styles.
+- `npm run format`: format; `npm run check`: format check, ESLint, API tests, strict typecheck and production build.
+
+Vite uses `--configLoader runner`; backend origin remains `http://localhost:5267`. No backend contract or feature was added during the foundation refactor.
 
 ## Deployment and acceptance
 
@@ -63,3 +67,7 @@ Verify against an isolated running backend: Admin login, page reload restoration
 - npm run build passed strict TypeScript checks and the production Vite bundle.
 - Focused API/session regression tests passed (8/8), including serialized refresh, logout during refresh, stale account mutations and validation errors.
 - Live backend/database/email integration and browser visual acceptance remain pending.
+
+## Foundation verification (18/10/2026)
+
+`npm run check` passed: format, ESLint, 14 API/session tests, TypeScript and production build. No browser/live-backend acceptance was performed.

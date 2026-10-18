@@ -5,3 +5,6 @@ dist/
 !.env.example
 *.local
 *.tsbuildinfo
+
+.npm-cache/
+*.log
