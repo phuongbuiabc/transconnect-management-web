@@ -6,7 +6,10 @@ interface Auth {
   user: User | null;
   loading: boolean;
   error: unknown;
-  signIn: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string, accountGroup?: string) => Promise<void>;
+  register: (email: string, password: string, fullName: string) => Promise<void>;
+  verify: (code: string) => Promise<void>;
+  resend: () => Promise<unknown>;
   signOut: () => Promise<void>;
   restore: () => Promise<void>;
 }
@@ -58,8 +61,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     loading,
     error,
     restore,
-    signIn: async (email, password) => {
-      await authApi.login(email, password);
+    register: async (email, password, fullName) => {
+      await authApi.register(email, password, fullName);
+      await restore();
+    },
+    verify: async (code) => {
+      if (user) {
+        await authApi.verify(user.email, code);
+        await restore();
+      }
+    },
+    resend: async () => {
+      if (user) return authApi.resend(user.email);
+    },
+    signIn: async (email, password, accountGroup) => {
+      await authApi.login(email, password, accountGroup);
       try {
         const current = await authApi.currentUser();
         setError(null);

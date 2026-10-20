@@ -10,7 +10,9 @@ export function createTransport(baseUrl: string) {
         ...init,
         headers: {
           Accept: 'application/json',
-          ...(init.body ? { 'Content-Type': 'application/json' } : {}),
+          ...(init.body && !(init.body instanceof FormData)
+            ? { 'Content-Type': 'application/json' }
+            : {}),
           ...(bearer ? { Authorization: 'Bearer ' + bearer } : {}),
           ...init.headers,
         },
@@ -18,6 +20,9 @@ export function createTransport(baseUrl: string) {
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') throw error;
       throw new ApiError(0, 'Không thể kết nối máy chủ. Kiểm tra kết nối và cấu hình API.');
+    }
+    if (response.ok && new Headers(init.headers).get('Accept') === 'application/octet-stream') {
+      return (await response.blob()) as T;
     }
     let envelope: Envelope<T> | null = null;
     try {

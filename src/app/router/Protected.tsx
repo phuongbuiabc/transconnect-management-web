@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../features/auth/hooks/useAuth';
 import { session } from '../../core/api/client';
 import { errorMessage } from '../../core/api/apiError';
 import { Brand, ErrorNotice, Loading } from '../../shared/ui';
 export function Protected() {
   const auth = useAuth();
+  const location = useLocation();
   if (auth.loading)
     return (
       <main className="center-page">
@@ -29,7 +30,13 @@ export function Protected() {
   }
   if (
     auth.user.accountGroup !== 'InternalAdmin' ||
-    !auth.user.permissions.includes('organizations.manage')
+    !(location.pathname === '/admin'
+      ? auth.user.permissions.some((permission) =>
+          ['organizations.manage', 'users.manage'].includes(permission),
+        )
+      : auth.user.permissions.includes(
+          location.pathname.startsWith('/admin/accounts') ? 'users.manage' : 'organizations.manage',
+        ))
   )
     return <Denied />;
   return <Outlet />;
@@ -43,7 +50,7 @@ function Denied() {
         <Brand />
         <span className="section-tag">TRUY CẬP GIỚI HẠN</span>
         <h1>Không đủ quyền truy cập</h1>
-        <p>Tài khoản cần thuộc nhóm quản trị nội bộ và được cấp quyền quản lý đơn vị vận tải.</p>
+        <p>Tài khoản cần thuộc nhóm quản trị nội bộ và được cấp quyền phù hợp với trang này.</p>
         {notice ? <p role="alert">{notice}</p> : null}
         <button
           className="button primary"

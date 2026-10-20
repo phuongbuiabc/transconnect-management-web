@@ -1,6 +1,10 @@
 # TransConnect Management Web
 
-Independent React + Vite + TypeScript + Tailwind application for TransConnect administration. Vietnamese interface follows the crimson/gold product direction. This first sprint implements Internal Admin organization review, with no mock data.
+Independent React + Vite + TypeScript + Tailwind application for TransConnect Admin and Partner. Vietnamese UI follows the crimson/gold product direction; screens use the local backend.
+
+Updated 20/10: /login selects InternalAdmin or Operator; Operator registration/email verification and /partner support authenticated organization submission/resubmission, account/avatar settings, staff/invitations, driver collaborations and vehicle/profile demo documents. /admin/accounts provides paged list/detail/lock/unlock/audit; /admin/drivers provides review/history; organization review includes legacy resubmission/Owner reinvitation and Admin vehicle confirmation. Permissions are enforced by BE and checked by route guards.
+
+Cloudinary credentials belong only in backend local configuration. Demo documents stay synthetic/NOT_VERIFIED and require Development ComplianceDemo/storage. Live SQL Server, SMTP, Cloudinary/storage and browser acceptance are not established by frontend build/tests. See [current test](../../TransConnect-Backend/docs/current-test.md) and [tracker](../../TransConnect-Docs/00-project/progress-tracker.md#closure-implementation-20-10).
 
 ## Local setup
 

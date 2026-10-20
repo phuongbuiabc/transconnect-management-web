@@ -13,6 +13,52 @@
   --border: #e6e8ed;
   --radius: 14px;
 }
+input[type='checkbox'] {
+  width: 18px;
+  min-height: 18px;
+  height: 18px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.foundation-workspace .panel,
+.foundation-workspace .recovery-card,
+.detail-grid > section.panel:not(.detail-panel) {
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.foundation-workspace article {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  overflow-wrap: anywhere;
+}
+.foundation-workspace form {
+  margin: 16px 0 24px;
+}
+.foundation-workspace button:not(.button) {
+  min-height: 44px;
+  padding: 8px 14px;
+  margin: 4px 8px 4px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+  color: var(--red-dark);
+}
+.foundation-workspace summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 8px 0;
+}
+.foundation-workspace nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+@media (max-width: 600px) {
+  .foundation-workspace .panel,
+  .foundation-workspace .recovery-card {
+    padding: 16px;
+  }
+}
 * {
   box-sizing: border-box;
 }

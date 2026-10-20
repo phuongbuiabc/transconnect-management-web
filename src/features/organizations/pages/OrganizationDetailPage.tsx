@@ -2,6 +2,9 @@ import { Link, useParams } from 'react-router-dom';
 import { ErrorNotice, Loading } from '../../../shared/ui';
 import { Status } from '../components/OrganizationStatus';
 import { useOrganization } from '../hooks/useOrganization';
+import { ReviewHistory } from '../../foundation/components/ReviewHistory';
+import { AdminVehicleLink } from '../../foundation/components/AdminVehicleLink';
+import { LegacyApplication } from '../components/LegacyApplication';
 export function OrganizationDetail() {
   const { id } = useParams();
   const {
@@ -44,6 +47,11 @@ export function OrganizationDetail() {
             </div>
           ) : null}
           <div className="detail-grid">
+            {!item.createdByUserId ? (
+              <LegacyApplication key={item.reviewStatus} organization={item} reload={reload} />
+            ) : null}
+            {item.reviewStatus === 'Approved' ? <AdminVehicleLink id={item.id} /> : null}
+            <ReviewHistory key={item.reviewStatus} type="organizations" id={item.id} />
             <section className="panel detail-panel">
               <h2>Thông tin đăng ký</h2>
               <dl>

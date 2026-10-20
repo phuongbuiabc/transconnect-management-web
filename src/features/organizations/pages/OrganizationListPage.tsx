@@ -4,17 +4,15 @@ import { ErrorNotice, Loading } from '../../../shared/ui';
 import { Status, statusLabels } from '../components/OrganizationStatus';
 import { useOrganizations } from '../hooks/useOrganizations';
 export function OrganizationList() {
-  const { items, loading, error, reload } = useOrganizations();
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('all');
-  const normalized = query.trim().toLocaleLowerCase('vi');
-  const filtered = items.filter(
-    (item) =>
-      (status === 'all' || item.reviewStatus === status) &&
-      [item.name, item.registrationNumber, item.ownerEmail].some((value) =>
-        value.toLocaleLowerCase('vi').includes(normalized),
-      ),
+  const [page, setPage] = useState(1);
+  const { items, total, totalPages, loading, error, reload } = useOrganizations(
+    page,
+    query,
+    status,
   );
+  const filtered = items;
   return (
     <>
       <div className="page-heading">
@@ -31,7 +29,7 @@ export function OrganizationList() {
         <div className="panel-toolbar">
           <div>
             <h2>Danh sách hồ sơ</h2>
-            <p>Hiển thị tối đa 200 hồ sơ do máy chủ trả về.</p>
+            <p>Tìm kiếm và phân trang theo dữ liệu máy chủ.</p>
           </div>
           <span className="count">{loading ? 'Đang tải' : items.length + ' hồ sơ đã tải'}</span>
         </div>
@@ -42,12 +40,21 @@ export function OrganizationList() {
               type="search"
               placeholder="Tìm tên, mã đăng ký, email…"
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                setPage(1);
+              }}
             />
           </label>
           <label>
             <span className="sr-only">Trạng thái hồ sơ</span>
-            <select value={status} onChange={(event) => setStatus(event.target.value)}>
+            <select
+              value={status}
+              onChange={(event) => {
+                setStatus(event.target.value);
+                setPage(1);
+              }}
+            >
               <option value="all">Tất cả trạng thái</option>
               {Object.entries(statusLabels).map(([value, label]) => (
                 <option key={value} value={value}>
@@ -108,19 +115,26 @@ export function OrganizationList() {
               </table>
             </div>
             <div className="table-footer">
-              {filtered.length} kết quả trong {items.length} hồ sơ đã tải · Bộ lọc chỉ áp dụng trên
-              dữ liệu này.
+              {total} hồ sơ · Trang {page} / {totalPages || 1}
             </div>
           </>
         )}
       </section>
+      <div className="review-actions">
+        <button disabled={loading || page === 1} onClick={() => setPage(page - 1)}>
+          Trước
+        </button>
+        <button disabled={loading || page >= totalPages} onClick={() => setPage(page + 1)}>
+          Sau
+        </button>
+      </div>
       <aside className="info-strip">
         <span className="info-icon" aria-hidden="true">
           i
         </span>
         <p>
           <strong>Duyệt hồ sơ một lần.</strong> Hồ sơ chỉ có thể được duyệt hoặc từ chối khi đang
-          chờ duyệt. Khi được duyệt, hệ thống gửi lời mời cho chủ sở hữu.
+          chờ duyệt. Người nộp nhận quyền Owner; hồ sơ nộp thay dùng lời mời qua email.
         </p>
       </aside>
     </>

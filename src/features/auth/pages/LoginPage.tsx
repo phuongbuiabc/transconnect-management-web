@@ -7,17 +7,24 @@ export function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [accountGroup, setAccountGroup] = useState('InternalAdmin');
+  const [registering, setRegistering] = useState(false);
+  const [fullName, setFullName] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<unknown>(null);
-  if (auth.user) return <Navigate to="/admin/organizations" replace />;
+  if (auth.user)
+    return <Navigate to={auth.user.accountGroup === 'Operator' ? '/partner' : '/admin'} replace />;
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (busy) return;
     setBusy(true);
     setError(null);
     try {
-      await auth.signIn(email.trim(), password);
-      navigate('/admin/organizations', { replace: true });
+      if (registering) await auth.register(email.trim(), password, fullName);
+      else await auth.signIn(email.trim(), password, accountGroup);
+      navigate(accountGroup === 'Operator' ? '/partner' : '/admin', {
+        replace: true,
+      });
     } catch (failure) {
       setError(failure);
     } finally {
@@ -58,6 +65,42 @@ export function LoginPage() {
           <h2>Chào mừng trở lại</h2>
           <p>Đăng nhập bằng tài khoản quản trị nội bộ.</p>
           <form onSubmit={submit}>
+            <label>
+              Cổng đăng nhập
+              <select
+                value={accountGroup}
+                disabled={busy}
+                onChange={(e) => {
+                  setAccountGroup(e.target.value);
+                  setRegistering(false);
+                }}
+              >
+                <option value="InternalAdmin">Quản trị nội bộ</option>
+                <option value="Operator">Đối tác vận tải</option>
+              </select>
+            </label>
+            {accountGroup === 'Operator' ? (
+              <label>
+                <input
+                  type="checkbox"
+                  checked={registering}
+                  disabled={busy}
+                  onChange={(e) => setRegistering(e.target.checked)}
+                />
+                Tạo tài khoản mới
+              </label>
+            ) : null}
+            {registering ? (
+              <label>
+                Họ tên
+                <input
+                  required
+                  maxLength={200}
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                />
+              </label>
+            ) : null}
             <label htmlFor="email">Email</label>
             <input
               id="email"

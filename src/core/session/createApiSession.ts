@@ -19,6 +19,9 @@ export function createApiSession(baseUrl: string, storage?: TokenStorage) {
   let refreshGeneration: number | null = null;
   const listeners = new Set<() => void>();
   const session = {
+    get generation() {
+      return generation;
+    },
     hasTokens: () => Boolean(tokens),
     subscribe: (listener: () => void) => {
       listeners.add(listener);

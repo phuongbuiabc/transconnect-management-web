@@ -1,6 +1,8 @@
 # Management web — cập nhật 18/10/2026
 
-React + TypeScript strict + Vite, repo độc lập. Giữ hành vi Admin Organization hiện có; chưa thêm Partner UI. Quy tắc [Docs](../../TransConnect-Docs/AGENTS.md), [Design System](../../TransConnect-Docs/06-ui/VIEGO_DESIGN_SYSTEM.md), [API baseline](../../TransConnect-Docs/09-decisions/api-baseline.md) giữ nguyên.
+React + TypeScript strict + Vite, repo độc lập. Cập nhật 20/10 theo yêu cầu triển khai: Admin và Partner có route/guard riêng, dùng BE local. Quy tắc [Docs](../../TransConnect-Docs/AGENTS.md), [Design System](../../TransConnect-Docs/06-ui/VIEGO_DESIGN_SYSTEM.md), [API baseline](../../TransConnect-Docs/09-decisions/api-baseline.md) giữ nguyên.
+
+features/accounts sở hữu API/hook/page list/detail/status/audit. features/foundation gom model/API/hook/component cho context, Driver review/history, workspace membership/driver/vehicle/giấy demo; organizations sở hữu application/list/review/resubmit và compose các public component foundation. Auth sở hữu Operator register/verify, account settings/avatar/change-password. Request hỗ trợ FormData và binary có xác thực, dùng cùng generation/refresh guard; API/hook không đưa token vào page hoặc URL. Kết quả check/test ở tracker.
 
 ```text
 src/
@@ -30,8 +32,8 @@ tests/
 - Gộp refresh theo generation, retry 401 một lần; không refresh 403, không retry mutation theo timeout/500. Refresh 5xx/mất mạng giữ phiên để thử lại. Logout/account switch không cho phản hồi cũ ghi đè. Không hứa server revoke thành công khi offline.
 - Hook sở hữu state dữ liệu, component sở hữu state trình bày. Cleanup AbortController/generation khi đổi route/unmount; error khác empty; mutation chỉ hiện thành công khi BE xác nhận. Không lưu bản sao dữ liệu có thể derive.
 - Model/type của feature nằm cùng feature; envelope/PagedResult/ApiError trong core. `data` list/null giữ nguyên. Lỗi fields giữ tên JSON để form mới hiển thị đúng ô nhập. API không có tiền tố `/api`.
-- Token/style theo Docs. Bộ lọc Organization hiện chỉ áp dụng tối đa 200 bản ghi BE trả; không gọi đó là phân trang server. Khi API đổi array → paged phải đổi parser/hook/test cùng đợt.
-- Partner sau này nằm trong cùng repo nhưng có layout/guard/menu riêng; không thêm trước chức năng/backend contract. Không tạo empty module/service/usecase hàng loạt.
+- Token/style theo Docs. Organization list dùng /organizations/search và PagedResult từ BE, lọc/count theo tenant trước page; Driver/Admin account cũng dùng server paging. API array cũ giữ tương thích. Các list lời mời/cộng tác cá nhân còn giới hạn 200 của demo, không giả là paging đầy đủ.
+- Partner /partner dùng Operator guard và UI theo membership; Admin /admin dùng InternalAdmin và permission tương ứng route. Backend quyết định quyền thật trên mỗi request; không suy từ role UI thành quyền giấy. Không tạo empty module/service/usecase hàng loạt.
 
 ## Chạy và kiểm tra
 

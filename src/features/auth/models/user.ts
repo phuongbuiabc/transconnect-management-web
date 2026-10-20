@@ -4,6 +4,8 @@ export interface User {
   userId: string;
   email: string;
   fullName: string;
+  phoneNumber?: string | null;
+  avatarUrl?: string | null;
   emailVerified: boolean;
   roles: string[];
   permissions: string[];

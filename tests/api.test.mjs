@@ -16,6 +16,51 @@ const tokens = (name) => ({
 });
 const ok = (data) => new Response(JSON.stringify({ succeeded: true, data }), { status: 200 });
 const unauthorized = () => new Response(JSON.stringify({ succeeded: false }), { status: 401 });
+test('multipart avatar keeps browser boundary and can retry after token rotation', async () => {
+  const form = new FormData();
+  form.set('file', new Blob(['synthetic-image']), 'avatar.png');
+  let uploads = 0,
+    refreshes = 0;
+  const api = await client(async (url, init) => {
+    if (url.endsWith('/auth/refresh')) {
+      refreshes++;
+      return ok(tokens('new'));
+    }
+    uploads++;
+    assert.equal(init.body, form);
+    assert.equal(init.headers['Content-Type'], undefined);
+    return init.headers.Authorization === 'Bearer old'
+      ? unauthorized()
+      : ok({ avatarUrl: 'https://res.cloudinary.com/demo/avatar' });
+  });
+  api.session.set(tokens('old'));
+  const result = await api.request('/auth/me/avatar', { method: 'POST', body: form });
+  assert.equal(result.avatarUrl, 'https://res.cloudinary.com/demo/avatar');
+  assert.equal(uploads, 2);
+  assert.equal(refreshes, 1);
+});
+test('private binary download uses session and preserves forbidden envelope errors', async () => {
+  let denied = false;
+  const api = await client(async (_url, init) => {
+    assert.equal(init.headers.Authorization, 'Bearer current');
+    return denied
+      ? new Response(JSON.stringify({ succeeded: false, message: 'No permission' }), {
+          status: 403,
+        })
+      : new Response(new Uint8Array([0, 255, 10]), { status: 200 });
+  });
+  api.session.set(tokens('current'));
+  const binary = await api.request('/compliance/demo/profile-documents/versions/id/download', {
+    headers: { Accept: 'application/octet-stream' },
+  });
+  assert.deepEqual([...new Uint8Array(await binary.arrayBuffer())], [0, 255, 10]);
+  denied = true;
+  await assert.rejects(
+    api.request('/private', { headers: { Accept: 'application/octet-stream' } }),
+    (error) => error.status === 403,
+  );
+  assert.equal(api.session.hasTokens(), true);
+});
 function deferred() {
   let resolve;
   const promise = new Promise((r) => (resolve = r));

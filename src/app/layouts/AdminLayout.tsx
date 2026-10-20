@@ -27,17 +27,29 @@ export function AdminLayout() {
         </Link>
         <div className="workspace-label">KHÔNG GIAN QUẢN TRỊ</div>
         <nav aria-label="Điều hướng chính">
-          <Link
-            aria-current="page"
-            className="nav-item active"
-            to="/admin/organizations"
-            onClick={() => setMenuOpen(false)}
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 21V7l8-4 8 4v14M9 21v-5h6v5M8 9h1m6 0h1M8 12h1m6 0h1M2 21h20" />
-            </svg>
-            Đơn vị vận tải
-          </Link>
+          {auth.user?.permissions.includes('organizations.manage') ? (
+            <Link className="nav-item" to="/admin/drivers" onClick={() => setMenuOpen(false)}>
+              Tài xế
+            </Link>
+          ) : null}
+          {auth.user?.permissions.includes('users.manage') ? (
+            <Link className="nav-item" to="/admin/accounts" onClick={() => setMenuOpen(false)}>
+              Tài khoản
+            </Link>
+          ) : null}
+          {auth.user?.permissions.includes('organizations.manage') ? (
+            <Link
+              aria-current="page"
+              className="nav-item active"
+              to="/admin/organizations"
+              onClick={() => setMenuOpen(false)}
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 21V7l8-4 8 4v14M9 21v-5h6v5M8 9h1m6 0h1M8 12h1m6 0h1M2 21h20" />
+              </svg>
+              Đơn vị vận tải
+            </Link>
+          ) : null}
         </nav>
         <div className="sidebar-bottom">
           <span className="avatar">

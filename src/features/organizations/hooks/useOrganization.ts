@@ -55,7 +55,7 @@ export function useOrganization(id: string | undefined) {
       setNote('');
       setSuccess(
         updated.reviewStatus === 'Approved'
-          ? 'Đã duyệt hồ sơ. Hệ thống đã tiếp nhận gửi lời mời cho chủ sở hữu.'
+          ? 'Đã duyệt hồ sơ. Người nộp nhận quyền Owner; hồ sơ nộp thay dùng lời mời qua email.'
           : 'Đã từ chối hồ sơ và lưu ghi chú xét duyệt.',
       );
     } catch (failure) {
