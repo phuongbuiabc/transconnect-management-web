@@ -1,6 +1,8 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ErrorNotice, Loading } from '../../../shared/ui';
+import { Icon } from '../../../shared/ui/Icon';
+import { EmptyRecords, EntityName, PageHeader, Pagination } from '../../../shared/ui/RecordLayout';
 import { Status, statusLabels } from '../components/OrganizationStatus';
 import { useOrganizations } from '../hooks/useOrganizations';
 export function OrganizationList() {
@@ -12,42 +14,47 @@ export function OrganizationList() {
     query,
     status,
   );
-  const filtered = items;
+  const filtering = !!query.trim() || status !== 'all';
   return (
     <>
-      <div className="page-heading">
-        <div>
-          <p className="eyebrow">QUẢN LÝ ĐỐI TÁC</p>
-          <h1>Đơn vị vận tải</h1>
-          <p>Kiểm tra hồ sơ và tiếp nhận đối tác vào hệ thống.</p>
-        </div>
-        <button className="button secondary" disabled={loading} onClick={reload}>
-          ↻ Làm mới
-        </button>
-      </div>
-      <section className="panel">
+      <PageHeader
+        title="Đơn vị vận tải"
+        description="Tiếp nhận, xem xét và quản lý hồ sơ đối tác vận tải."
+        action={
+          <button type="button" className="button secondary" disabled={loading} onClick={reload}>
+            <Icon name="refresh" />
+            Làm mới
+          </button>
+        }
+      />
+      <section className="panel" aria-label="Danh sách đơn vị vận tải" aria-busy={loading}>
         <div className="panel-toolbar">
           <div>
-            <h2>Danh sách hồ sơ</h2>
-            <p>Tìm kiếm và phân trang theo dữ liệu máy chủ.</p>
+            <h2>Hồ sơ đối tác</h2>
+            <p>Thông tin đăng ký và trạng thái xét duyệt.</p>
           </div>
-          <span className="count">{loading ? 'Đang tải' : items.length + ' hồ sơ đã tải'}</span>
+          <span className="count">
+            {loading ? 'Đang tải' : `${total.toLocaleString('vi-VN')} hồ sơ`}
+          </span>
         </div>
         <div className="filters">
           <label className="search-label">
-            <span className="sr-only">Tìm trong hồ sơ đã tải</span>
-            <input
-              type="search"
-              placeholder="Tìm tên, mã đăng ký, email…"
-              value={query}
-              onChange={(event) => {
-                setQuery(event.target.value);
-                setPage(1);
-              }}
-            />
+            <span className="filter-caption">Tìm kiếm hồ sơ</span>
+            <span className="search-control">
+              <Icon name="search" />
+              <input
+                type="search"
+                placeholder="Tên đơn vị, mã đăng ký, email…"
+                value={query}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setPage(1);
+                }}
+              />
+            </span>
           </label>
           <label>
-            <span className="sr-only">Trạng thái hồ sơ</span>
+            <span className="filter-caption">Trạng thái</span>
             <select
               value={status}
               onChange={(event) => {
@@ -68,73 +75,81 @@ export function OrganizationList() {
           <Loading />
         ) : error ? (
           <ErrorNotice error={error} retry={reload} />
-        ) : filtered.length === 0 ? (
-          <div className="state">
-            <h3>{items.length ? 'Không có hồ sơ phù hợp' : 'Chưa có hồ sơ đăng ký'}</h3>
-            <p>
-              {items.length
-                ? 'Thử thay đổi từ khóa hoặc trạng thái.'
-                : 'Hồ sơ đăng ký của đơn vị vận tải sẽ xuất hiện tại đây.'}
-            </p>
-          </div>
+        ) : items.length === 0 ? (
+          <EmptyRecords
+            title={filtering ? 'Không có hồ sơ phù hợp' : 'Chưa có hồ sơ đăng ký'}
+            description={
+              filtering
+                ? 'Thử thay đổi từ khóa hoặc trạng thái hồ sơ.'
+                : 'Hồ sơ đăng ký của đơn vị vận tải sẽ xuất hiện tại đây.'
+            }
+          />
         ) : (
-          <>
-            <div className="table-scroll">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Đơn vị vận tải</th>
-                    <th>Email chủ sở hữu</th>
-                    <th>Trạng thái</th>
-                    <th>
-                      <span className="sr-only">Thao tác</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.map((item) => (
-                    <tr key={item.id}>
-                      <td>
+          <div
+            className="table-scroll"
+            tabIndex={0}
+            role="region"
+            aria-label="Bảng hồ sơ đối tác, có thể cuộn ngang"
+          >
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Đơn vị vận tải</th>
+                  <th scope="col">Email chủ sở hữu</th>
+                  <th scope="col">Trạng thái</th>
+                  <th scope="col">
+                    <span className="sr-only">Thao tác</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {items.map((item) => (
+                  <tr key={item.id}>
+                    <td>
+                      <EntityName
+                        name={item.name}
+                        secondary={'Mã đăng ký: ' + item.registrationNumber}
+                      >
                         <Link className="organization-name" to={'/admin/organizations/' + item.id}>
                           {item.name}
                         </Link>
-                        <small>Mã đăng ký: {item.registrationNumber}</small>
-                      </td>
-                      <td>{item.ownerEmail}</td>
-                      <td>
-                        <Status value={item.reviewStatus} />
-                      </td>
-                      <td>
-                        <Link className="text-link" to={'/admin/organizations/' + item.id}>
-                          Xem hồ sơ <span aria-hidden="true">→</span>
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="table-footer">
-              {total} hồ sơ · Trang {page} / {totalPages || 1}
-            </div>
-          </>
+                      </EntityName>
+                    </td>
+                    <td>{item.ownerEmail}</td>
+                    <td>
+                      <Status value={item.reviewStatus} />
+                    </td>
+                    <td>
+                      <Link className="text-link" to={'/admin/organizations/' + item.id}>
+                        Xem hồ sơ
+                        <Icon name="arrow" />
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
+        {!loading && !error ? (
+          <div className="table-footer">
+            <span>Hiển thị {items.length} hồ sơ trên trang này</span>
+            <span>Dữ liệu được phân trang từ máy chủ</span>
+          </div>
+        ) : null}
       </section>
-      <div className="review-actions">
-        <button disabled={loading || page === 1} onClick={() => setPage(page - 1)}>
-          Trước
-        </button>
-        <button disabled={loading || page >= totalPages} onClick={() => setPage(page + 1)}>
-          Sau
-        </button>
-      </div>
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        total={total}
+        loading={loading}
+        onChange={setPage}
+      />
       <aside className="info-strip">
-        <span className="info-icon" aria-hidden="true">
-          i
-        </span>
+        <Icon name="info" />
         <p>
-          <strong>Duyệt hồ sơ một lần.</strong> Hồ sơ chỉ có thể được duyệt hoặc từ chối khi đang
-          chờ duyệt. Người nộp nhận quyền Owner; hồ sơ nộp thay dùng lời mời qua email.
+          <strong>Xét duyệt hồ sơ.</strong> Chỉ hồ sơ đang chờ duyệt mới có thể được duyệt hoặc từ
+          chối. Người nộp nhận quyền Owner; hồ sơ nộp thay sử dụng lời mời qua email.
         </p>
       </aside>
     </>

@@ -8,11 +8,18 @@ import { AccountsPage } from '../features/accounts/pages/AccountsPage';
 import { DriversPage } from '../features/foundation/pages/DriversPage';
 import { PartnerPage } from '../features/organizations/pages/PartnerPage';
 import { useAuth } from '../features/auth/hooks/useAuth';
+import { LocationsPage } from '../features/locations/pages/LocationsPage';
 function AdminLanding() {
   const auth = useAuth();
   return (
     <Navigate
-      to={auth.user?.permissions.includes('organizations.manage') ? 'organizations' : 'accounts'}
+      to={
+        auth.user?.permissions.includes('organizations.manage')
+          ? 'organizations'
+          : auth.user?.permissions.includes('users.manage')
+            ? 'accounts'
+            : 'locations'
+      }
       replace
     />
   );
@@ -20,7 +27,9 @@ function AdminLanding() {
 export default function App() {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/login" element={<Navigate to="/login/admin" replace />} />
+      <Route path="/login/admin" element={<LoginPage key="admin" portal="InternalAdmin" />} />
+      <Route path="/login/partner" element={<LoginPage key="partner" portal="Operator" />} />
       <Route path="/partner" element={<PartnerPage />} />
       <Route element={<Protected />}>
         <Route path="/admin" element={<AdminLayout />}>
@@ -29,6 +38,7 @@ export default function App() {
           <Route path="organizations/:id" element={<OrganizationDetail />} />
           <Route path="accounts" element={<AccountsPage />} />
           <Route path="drivers" element={<DriversPage />} />
+          <Route path="locations" element={<LocationsPage />} />
         </Route>
       </Route>
       <Route path="/" element={<Navigate to="/admin" replace />} />

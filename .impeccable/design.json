@@ -1,0 +1,972 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-30T19:06:32.787758+00:00",
+  "title": "Design System: VieGo Management",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Primary",
+        "canonical": "#d3171e",
+        "tonalRamp": [
+          "oklch(15% 0.0630 27.08)",
+          "oklch(27% 0.1170 27.08)",
+          "oklch(39% 0.1530 27.08)",
+          "oklch(51% 0.1800 27.08)",
+          "oklch(63% 0.1800 27.08)",
+          "oklch(75% 0.1440 27.08)",
+          "oklch(87% 0.0900 27.08)",
+          "oklch(95% 0.0360 27.08)"
+        ]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Primary Hover",
+        "canonical": "#ad1117",
+        "tonalRamp": [
+          "oklch(15% 0.0630 27.01)",
+          "oklch(27% 0.1170 27.01)",
+          "oklch(39% 0.1530 27.01)",
+          "oklch(51% 0.1800 27.01)",
+          "oklch(63% 0.1800 27.01)",
+          "oklch(75% 0.1440 27.01)",
+          "oklch(87% 0.0900 27.01)",
+          "oklch(95% 0.0360 27.01)"
+        ]
+      },
+      "gold": {
+        "role": "secondary",
+        "displayName": "Gold",
+        "canonical": "#ffc72c",
+        "tonalRamp": [
+          "oklch(15% 0.0579 86.55)",
+          "oklch(27% 0.1076 86.55)",
+          "oklch(39% 0.1407 86.55)",
+          "oklch(51% 0.1655 86.55)",
+          "oklch(63% 0.1655 86.55)",
+          "oklch(75% 0.1324 86.55)",
+          "oklch(87% 0.0827 86.55)",
+          "oklch(95% 0.0331 86.55)"
+        ]
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Canvas",
+        "canonical": "#f7f7f3",
+        "tonalRamp": [
+          "oklch(15% 0.0018 106.50)",
+          "oklch(27% 0.0034 106.50)",
+          "oklch(39% 0.0045 106.50)",
+          "oklch(51% 0.0053 106.50)",
+          "oklch(63% 0.0053 106.50)",
+          "oklch(75% 0.0042 106.50)",
+          "oklch(87% 0.0026 106.50)",
+          "oklch(95% 0.0011 106.50)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel",
+        "canonical": "#fff",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(27% 0.0000 89.88)",
+          "oklch(39% 0.0000 89.88)",
+          "oklch(51% 0.0000 89.88)",
+          "oklch(63% 0.0000 89.88)",
+          "oklch(75% 0.0000 89.88)",
+          "oklch(87% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "subtle": {
+        "role": "neutral",
+        "displayName": "Subtle",
+        "canonical": "#fafaf7",
+        "tonalRamp": [
+          "oklch(15% 0.0014 106.47)",
+          "oklch(27% 0.0026 106.47)",
+          "oklch(39% 0.0034 106.47)",
+          "oklch(51% 0.0040 106.47)",
+          "oklch(63% 0.0040 106.47)",
+          "oklch(75% 0.0032 106.47)",
+          "oklch(87% 0.0020 106.47)",
+          "oklch(95% 0.0008 106.47)"
+        ]
+      },
+      "text-primary": {
+        "role": "neutral",
+        "displayName": "Text Primary",
+        "canonical": "#242824",
+        "tonalRamp": [
+          "oklch(15% 0.0032 145.31)",
+          "oklch(27% 0.0060 145.31)",
+          "oklch(39% 0.0079 145.31)",
+          "oklch(51% 0.0093 145.31)",
+          "oklch(63% 0.0093 145.31)",
+          "oklch(75% 0.0074 145.31)",
+          "oklch(87% 0.0046 145.31)",
+          "oklch(95% 0.0019 145.31)"
+        ]
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Text Secondary",
+        "canonical": "#626963",
+        "tonalRamp": [
+          "oklch(15% 0.0044 149.68)",
+          "oklch(27% 0.0082 149.68)",
+          "oklch(39% 0.0108 149.68)",
+          "oklch(51% 0.0127 149.68)",
+          "oklch(63% 0.0127 149.68)",
+          "oklch(75% 0.0101 149.68)",
+          "oklch(87% 0.0063 149.68)",
+          "oklch(95% 0.0025 149.68)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "#e3e6de",
+        "tonalRamp": [
+          "oklch(15% 0.0039 123.47)",
+          "oklch(27% 0.0073 123.47)",
+          "oklch(39% 0.0095 123.47)",
+          "oklch(51% 0.0112 123.47)",
+          "oklch(63% 0.0112 123.47)",
+          "oklch(75% 0.0089 123.47)",
+          "oklch(87% 0.0056 123.47)",
+          "oklch(95% 0.0022 123.47)"
+        ]
+      },
+      "rail": {
+        "role": "neutral",
+        "displayName": "Rail",
+        "canonical": "#181c22",
+        "tonalRamp": [
+          "oklch(15% 0.0046 258.37)",
+          "oklch(27% 0.0086 258.37)",
+          "oklch(39% 0.0112 258.37)",
+          "oklch(51% 0.0132 258.37)",
+          "oklch(63% 0.0132 258.37)",
+          "oklch(75% 0.0105 258.37)",
+          "oklch(87% 0.0066 258.37)",
+          "oklch(95% 0.0026 258.37)"
+        ]
+      },
+      "rail-text": {
+        "role": "neutral",
+        "displayName": "Rail Text",
+        "canonical": "#bdc4ce",
+        "tonalRamp": [
+          "oklch(15% 0.0056 257.21)",
+          "oklch(27% 0.0104 257.21)",
+          "oklch(39% 0.0136 257.21)",
+          "oklch(51% 0.0160 257.21)",
+          "oklch(63% 0.0160 257.21)",
+          "oklch(75% 0.0128 257.21)",
+          "oklch(87% 0.0080 257.21)",
+          "oklch(95% 0.0032 257.21)"
+        ]
+      },
+      "rail-hover": {
+        "role": "neutral",
+        "displayName": "Rail Hover",
+        "canonical": "#292f38",
+        "tonalRamp": [
+          "oklch(15% 0.0064 258.37)",
+          "oklch(27% 0.0119 258.37)",
+          "oklch(39% 0.0156 258.37)",
+          "oklch(51% 0.0184 258.37)",
+          "oklch(63% 0.0184 258.37)",
+          "oklch(75% 0.0147 258.37)",
+          "oklch(87% 0.0092 258.37)",
+          "oklch(95% 0.0037 258.37)"
+        ]
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "Focus",
+        "canonical": "#a30f16",
+        "tonalRamp": [
+          "oklch(15% 0.0622 26.74)",
+          "oklch(27% 0.1155 26.74)",
+          "oklch(39% 0.1510 26.74)",
+          "oklch(51% 0.1777 26.74)",
+          "oklch(63% 0.1777 26.74)",
+          "oklch(75% 0.1421 26.74)",
+          "oklch(87% 0.0888 26.74)",
+          "oklch(95% 0.0355 26.74)"
+        ]
+      },
+      "panel-line": {
+        "role": "neutral",
+        "displayName": "Panel Line",
+        "canonical": "#e1e5dc",
+        "tonalRamp": [
+          "oklch(15% 0.0045 126.38)",
+          "oklch(27% 0.0083 126.38)",
+          "oklch(39% 0.0109 126.38)",
+          "oklch(51% 0.0128 126.38)",
+          "oklch(63% 0.0128 126.38)",
+          "oklch(75% 0.0102 126.38)",
+          "oklch(87% 0.0064 126.38)",
+          "oklch(95% 0.0026 126.38)"
+        ]
+      },
+      "filter-bg": {
+        "role": "neutral",
+        "displayName": "Filter Bg",
+        "canonical": "#fdfefb",
+        "tonalRamp": [
+          "oklch(15% 0.0014 121.56)",
+          "oklch(27% 0.0026 121.56)",
+          "oklch(39% 0.0035 121.56)",
+          "oklch(51% 0.0041 121.56)",
+          "oklch(63% 0.0041 121.56)",
+          "oklch(75% 0.0033 121.56)",
+          "oklch(87% 0.0020 121.56)",
+          "oklch(95% 0.0008 121.56)"
+        ]
+      },
+      "filter-line": {
+        "role": "neutral",
+        "displayName": "Filter Line",
+        "canonical": "#d5dccd",
+        "tonalRamp": [
+          "oklch(15% 0.0076 127.41)",
+          "oklch(27% 0.0140 127.41)",
+          "oklch(39% 0.0183 127.41)",
+          "oklch(51% 0.0216 127.41)",
+          "oklch(63% 0.0216 127.41)",
+          "oklch(75% 0.0173 127.41)",
+          "oklch(87% 0.0108 127.41)",
+          "oklch(95% 0.0043 127.41)"
+        ]
+      },
+      "table-heading-bg": {
+        "role": "neutral",
+        "displayName": "Table Heading Bg",
+        "canonical": "#f6f8f2",
+        "tonalRamp": [
+          "oklch(15% 0.0029 121.63)",
+          "oklch(27% 0.0053 121.63)",
+          "oklch(39% 0.0070 121.63)",
+          "oklch(51% 0.0082 121.63)",
+          "oklch(63% 0.0082 121.63)",
+          "oklch(75% 0.0065 121.63)",
+          "oklch(87% 0.0041 121.63)",
+          "oklch(95% 0.0016 121.63)"
+        ]
+      },
+      "table-heading-text": {
+        "role": "neutral",
+        "displayName": "Table Heading Text",
+        "canonical": "#637057",
+        "tonalRamp": [
+          "oklch(15% 0.0144 130.11)",
+          "oklch(27% 0.0267 130.11)",
+          "oklch(39% 0.0350 130.11)",
+          "oklch(51% 0.0411 130.11)",
+          "oklch(63% 0.0411 130.11)",
+          "oklch(75% 0.0329 130.11)",
+          "oklch(87% 0.0206 130.11)",
+          "oklch(95% 0.0082 130.11)"
+        ]
+      },
+      "navigation-text": {
+        "role": "neutral",
+        "displayName": "Navigation Text",
+        "canonical": "#59634f",
+        "tonalRamp": [
+          "oklch(15% 0.0117 129.26)",
+          "oklch(27% 0.0218 129.26)",
+          "oklch(39% 0.0284 129.26)",
+          "oklch(51% 0.0335 129.26)",
+          "oklch(63% 0.0335 129.26)",
+          "oklch(75% 0.0268 129.26)",
+          "oklch(87% 0.0167 129.26)",
+          "oklch(95% 0.0067 129.26)"
+        ]
+      },
+      "navigation-hover": {
+        "role": "neutral",
+        "displayName": "Navigation Hover",
+        "canonical": "#f1f4e9",
+        "tonalRamp": [
+          "oklch(15% 0.0052 119.10)",
+          "oklch(27% 0.0097 119.10)",
+          "oklch(39% 0.0126 119.10)",
+          "oklch(51% 0.0149 119.10)",
+          "oklch(63% 0.0149 119.10)",
+          "oklch(75% 0.0119 119.10)",
+          "oklch(87% 0.0074 119.10)",
+          "oklch(95% 0.0030 119.10)"
+        ]
+      },
+      "identity-bg": {
+        "role": "neutral",
+        "displayName": "Identity Bg",
+        "canonical": "#f3f5ee",
+        "tonalRamp": [
+          "oklch(15% 0.0033 119.58)",
+          "oklch(27% 0.0062 119.58)",
+          "oklch(39% 0.0081 119.58)",
+          "oklch(51% 0.0095 119.58)",
+          "oklch(63% 0.0095 119.58)",
+          "oklch(75% 0.0076 119.58)",
+          "oklch(87% 0.0047 119.58)",
+          "oklch(95% 0.0019 119.58)"
+        ]
+      },
+      "identity-text": {
+        "role": "neutral",
+        "displayName": "Identity Text",
+        "canonical": "#657154",
+        "tonalRamp": [
+          "oklch(15% 0.0161 126.19)",
+          "oklch(27% 0.0299 126.19)",
+          "oklch(39% 0.0391 126.19)",
+          "oklch(51% 0.0460 126.19)",
+          "oklch(63% 0.0460 126.19)",
+          "oklch(75% 0.0368 126.19)",
+          "oklch(87% 0.0230 126.19)",
+          "oklch(95% 0.0092 126.19)"
+        ]
+      },
+      "input-line": {
+        "role": "neutral",
+        "displayName": "Input Line",
+        "canonical": "#cbd1d9",
+        "tonalRamp": [
+          "oklch(15% 0.0045 255.51)",
+          "oklch(27% 0.0084 255.51)",
+          "oklch(39% 0.0109 255.51)",
+          "oklch(51% 0.0129 255.51)",
+          "oklch(63% 0.0129 255.51)",
+          "oklch(75% 0.0103 255.51)",
+          "oklch(87% 0.0064 255.51)",
+          "oklch(95% 0.0026 255.51)"
+        ]
+      },
+      "secondary-text": {
+        "role": "neutral",
+        "displayName": "Secondary Text",
+        "canonical": "#333d4a",
+        "tonalRamp": [
+          "oklch(15% 0.0092 255.10)",
+          "oklch(27% 0.0171 255.10)",
+          "oklch(39% 0.0224 255.10)",
+          "oklch(51% 0.0263 255.10)",
+          "oklch(63% 0.0263 255.10)",
+          "oklch(75% 0.0210 255.10)",
+          "oklch(87% 0.0132 255.10)",
+          "oklch(95% 0.0053 255.10)"
+        ]
+      },
+      "secondary-line": {
+        "role": "neutral",
+        "displayName": "Secondary Line",
+        "canonical": "#dce0e6",
+        "tonalRamp": [
+          "oklch(15% 0.0032 258.34)",
+          "oklch(27% 0.0060 258.34)",
+          "oklch(39% 0.0079 258.34)",
+          "oklch(51% 0.0092 258.34)",
+          "oklch(63% 0.0092 258.34)",
+          "oklch(75% 0.0074 258.34)",
+          "oklch(87% 0.0046 258.34)",
+          "oklch(95% 0.0018 258.34)"
+        ]
+      },
+      "secondary-hover": {
+        "role": "neutral",
+        "displayName": "Secondary Hover",
+        "canonical": "#f0f2f5",
+        "tonalRamp": [
+          "oklch(15% 0.0016 258.32)",
+          "oklch(27% 0.0030 258.32)",
+          "oklch(39% 0.0039 258.32)",
+          "oklch(51% 0.0046 258.32)",
+          "oklch(63% 0.0046 258.32)",
+          "oklch(75% 0.0036 258.32)",
+          "oklch(87% 0.0023 258.32)",
+          "oklch(95% 0.0009 258.32)"
+        ]
+      },
+      "pending-bg": {
+        "role": "semantic",
+        "displayName": "Pending Bg",
+        "canonical": "#fff8e7",
+        "tonalRamp": [
+          "oklch(15% 0.0082 88.23)",
+          "oklch(27% 0.0153 88.23)",
+          "oklch(39% 0.0200 88.23)",
+          "oklch(51% 0.0235 88.23)",
+          "oklch(63% 0.0235 88.23)",
+          "oklch(75% 0.0188 88.23)",
+          "oklch(87% 0.0118 88.23)",
+          "oklch(95% 0.0047 88.23)"
+        ]
+      },
+      "pending-text": {
+        "role": "semantic",
+        "displayName": "Pending Text",
+        "canonical": "#826014",
+        "tonalRamp": [
+          "oklch(15% 0.0342 82.13)",
+          "oklch(27% 0.0635 82.13)",
+          "oklch(39% 0.0830 82.13)",
+          "oklch(51% 0.0976 82.13)",
+          "oklch(63% 0.0976 82.13)",
+          "oklch(75% 0.0781 82.13)",
+          "oklch(87% 0.0488 82.13)",
+          "oklch(95% 0.0195 82.13)"
+        ]
+      },
+      "pending-line": {
+        "role": "semantic",
+        "displayName": "Pending Line",
+        "canonical": "#f5dfac",
+        "tonalRamp": [
+          "oklch(15% 0.0246 87.39)",
+          "oklch(27% 0.0456 87.39)",
+          "oklch(39% 0.0597 87.39)",
+          "oklch(51% 0.0702 87.39)",
+          "oklch(63% 0.0702 87.39)",
+          "oklch(75% 0.0561 87.39)",
+          "oklch(87% 0.0351 87.39)",
+          "oklch(95% 0.0140 87.39)"
+        ]
+      },
+      "approved-bg": {
+        "role": "semantic",
+        "displayName": "Approved Bg",
+        "canonical": "#edf8f1",
+        "tonalRamp": [
+          "oklch(15% 0.0052 158.25)",
+          "oklch(27% 0.0096 158.25)",
+          "oklch(39% 0.0126 158.25)",
+          "oklch(51% 0.0148 158.25)",
+          "oklch(63% 0.0148 158.25)",
+          "oklch(75% 0.0119 158.25)",
+          "oklch(87% 0.0074 158.25)",
+          "oklch(95% 0.0030 158.25)"
+        ]
+      },
+      "approved-text": {
+        "role": "semantic",
+        "displayName": "Approved Text",
+        "canonical": "#247347",
+        "tonalRamp": [
+          "oklch(15% 0.0364 154.97)",
+          "oklch(27% 0.0676 154.97)",
+          "oklch(39% 0.0884 154.97)",
+          "oklch(51% 0.1040 154.97)",
+          "oklch(63% 0.1040 154.97)",
+          "oklch(75% 0.0832 154.97)",
+          "oklch(87% 0.0520 154.97)",
+          "oklch(95% 0.0208 154.97)"
+        ]
+      },
+      "approved-line": {
+        "role": "semantic",
+        "displayName": "Approved Line",
+        "canonical": "#c5e6d3",
+        "tonalRamp": [
+          "oklch(15% 0.0151 160.17)",
+          "oklch(27% 0.0281 160.17)",
+          "oklch(39% 0.0367 160.17)",
+          "oklch(51% 0.0432 160.17)",
+          "oklch(63% 0.0432 160.17)",
+          "oklch(75% 0.0346 160.17)",
+          "oklch(87% 0.0216 160.17)",
+          "oklch(95% 0.0086 160.17)"
+        ]
+      },
+      "rejected-bg": {
+        "role": "semantic",
+        "displayName": "Rejected Bg",
+        "canonical": "#fdefef",
+        "tonalRamp": [
+          "oklch(15% 0.0053 17.42)",
+          "oklch(27% 0.0099 17.42)",
+          "oklch(39% 0.0129 17.42)",
+          "oklch(51% 0.0152 17.42)",
+          "oklch(63% 0.0152 17.42)",
+          "oklch(75% 0.0121 17.42)",
+          "oklch(87% 0.0076 17.42)",
+          "oklch(95% 0.0030 17.42)"
+        ]
+      },
+      "rejected-text": {
+        "role": "semantic",
+        "displayName": "Rejected Text",
+        "canonical": "#a72732",
+        "tonalRamp": [
+          "oklch(15% 0.0572 21.60)",
+          "oklch(27% 0.1063 21.60)",
+          "oklch(39% 0.1390 21.60)",
+          "oklch(51% 0.1635 21.60)",
+          "oklch(63% 0.1635 21.60)",
+          "oklch(75% 0.1308 21.60)",
+          "oklch(87% 0.0818 21.60)",
+          "oklch(95% 0.0327 21.60)"
+        ]
+      },
+      "rejected-line": {
+        "role": "semantic",
+        "displayName": "Rejected Line",
+        "canonical": "#f2cdd0",
+        "tonalRamp": [
+          "oklch(15% 0.0147 12.45)",
+          "oklch(27% 0.0272 12.45)",
+          "oklch(39% 0.0356 12.45)",
+          "oklch(51% 0.0419 12.45)",
+          "oklch(63% 0.0419 12.45)",
+          "oklch(75% 0.0335 12.45)",
+          "oklch(87% 0.0209 12.45)",
+          "oklch(95% 0.0084 12.45)"
+        ]
+      },
+      "danger-outline-text": {
+        "role": "semantic",
+        "displayName": "Danger Outline Text",
+        "canonical": "#b21218",
+        "tonalRamp": [
+          "oklch(15% 0.0630 27.03)",
+          "oklch(27% 0.1170 27.03)",
+          "oklch(39% 0.1530 27.03)",
+          "oklch(51% 0.1800 27.03)",
+          "oklch(63% 0.1800 27.03)",
+          "oklch(75% 0.1440 27.03)",
+          "oklch(87% 0.0900 27.03)",
+          "oklch(95% 0.0360 27.03)"
+        ]
+      },
+      "danger-outline-line": {
+        "role": "semantic",
+        "displayName": "Danger Outline Line",
+        "canonical": "#efb8bb",
+        "tonalRamp": [
+          "oklch(15% 0.0224 14.88)",
+          "oklch(27% 0.0415 14.88)",
+          "oklch(39% 0.0543 14.88)",
+          "oklch(51% 0.0639 14.88)",
+          "oklch(63% 0.0639 14.88)",
+          "oklch(75% 0.0511 14.88)",
+          "oklch(87% 0.0319 14.88)",
+          "oklch(95% 0.0128 14.88)"
+        ]
+      },
+      "danger-outline-hover": {
+        "role": "semantic",
+        "displayName": "Danger Outline Hover",
+        "canonical": "#fff3f3",
+        "tonalRamp": [
+          "oklch(15% 0.0045 17.38)",
+          "oklch(27% 0.0084 17.38)",
+          "oklch(39% 0.0110 17.38)",
+          "oklch(51% 0.0129 17.38)",
+          "oklch(63% 0.0129 17.38)",
+          "oklch(75% 0.0103 17.38)",
+          "oklch(87% 0.0065 17.38)",
+          "oklch(95% 0.0026 17.38)"
+        ]
+      },
+      "auth-canvas": {
+        "role": "neutral",
+        "displayName": "Auth Cream Canvas",
+        "canonical": "#f7f5f0",
+        "tonalRamp": [
+          "oklch(15% 0.008 75)",
+          "oklch(27% 0.012 75)",
+          "oklch(39% 0.016 75)",
+          "oklch(51% 0.020 75)",
+          "oklch(63% 0.020 75)",
+          "oklch(75% 0.016 75)",
+          "oklch(87% 0.010 75)",
+          "oklch(95% 0.005 75)"
+        ]
+      },
+      "auth-line": {
+        "role": "neutral",
+        "displayName": "Auth Form Line",
+        "canonical": "#e1ddd5",
+        "tonalRamp": [
+          "oklch(15% 0.008 75)",
+          "oklch(27% 0.012 75)",
+          "oklch(39% 0.016 75)",
+          "oklch(51% 0.020 75)",
+          "oklch(63% 0.020 75)",
+          "oklch(75% 0.016 75)",
+          "oklch(87% 0.010 75)",
+          "oklch(95% 0.005 75)"
+        ]
+      },
+      "auth-divider": {
+        "role": "neutral",
+        "displayName": "Auth Portal Divider",
+        "canonical": "#d9d4ca",
+        "tonalRamp": [
+          "oklch(15% 0.008 75)",
+          "oklch(27% 0.012 75)",
+          "oklch(39% 0.016 75)",
+          "oklch(51% 0.020 75)",
+          "oklch(63% 0.020 75)",
+          "oklch(75% 0.016 75)",
+          "oklch(87% 0.010 75)",
+          "oklch(95% 0.005 75)"
+        ]
+      },
+      "auth-muted": {
+        "role": "neutral",
+        "displayName": "Auth Muted Text",
+        "canonical": "#625e58",
+        "tonalRamp": [
+          "oklch(15% 0.008 75)",
+          "oklch(27% 0.012 75)",
+          "oklch(39% 0.016 75)",
+          "oklch(51% 0.020 75)",
+          "oklch(63% 0.020 75)",
+          "oklch(75% 0.016 75)",
+          "oklch(87% 0.010 75)",
+          "oklch(95% 0.005 75)"
+        ]
+      },
+      "auth-portal-text": {
+        "role": "neutral",
+        "displayName": "Auth Portal Text",
+        "canonical": "#4b4741",
+        "tonalRamp": [
+          "oklch(15% 0.008 75)",
+          "oklch(27% 0.012 75)",
+          "oklch(39% 0.016 75)",
+          "oklch(51% 0.020 75)",
+          "oklch(63% 0.020 75)",
+          "oklch(75% 0.016 75)",
+          "oklch(87% 0.010 75)",
+          "oklch(95% 0.005 75)"
+        ]
+      },
+      "auth-portal-hover": {
+        "role": "neutral",
+        "displayName": "Auth Portal Hover",
+        "canonical": "#efece5",
+        "tonalRamp": [
+          "oklch(15% 0.008 75)",
+          "oklch(27% 0.012 75)",
+          "oklch(39% 0.016 75)",
+          "oklch(51% 0.020 75)",
+          "oklch(63% 0.020 75)",
+          "oklch(75% 0.016 75)",
+          "oklch(87% 0.010 75)",
+          "oklch(95% 0.005 75)"
+        ]
+      },
+      "auth-portal-current": {
+        "role": "neutral",
+        "displayName": "Auth Portal Current",
+        "canonical": "#f1e7df",
+        "tonalRamp": [
+          "oklch(15% 0.008 75)",
+          "oklch(27% 0.012 75)",
+          "oklch(39% 0.016 75)",
+          "oklch(51% 0.020 75)",
+          "oklch(63% 0.020 75)",
+          "oklch(75% 0.016 75)",
+          "oklch(87% 0.010 75)",
+          "oklch(95% 0.005 75)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Retained legacy display role; current auth context uses auth-intro."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Main Management task heading."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Title role as documented in DESIGN.md."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Body role as documented in DESIGN.md."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Label role as documented in DESIGN.md."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Control role as documented in DESIGN.md."
+      },
+      "table-body": {
+        "displayName": "Table Body",
+        "purpose": "Readable secondary record data."
+      },
+      "status": {
+        "displayName": "Status",
+        "purpose": "Supporting labeled semantic chip."
+      },
+      "headline-tablet": {
+        "displayName": "Headline Tablet",
+        "purpose": "Task heading at 900px and below."
+      },
+      "headline-mobile": {
+        "displayName": "Headline Mobile",
+        "purpose": "Task heading at 760px and below."
+      },
+      "detail-title": {
+        "displayName": "Detail Title",
+        "purpose": "Detail title role as documented in DESIGN.md."
+      },
+      "panel-title-mobile": {
+        "displayName": "Panel Title Mobile",
+        "purpose": "Panel title mobile role as documented in DESIGN.md."
+      },
+      "record-identity": {
+        "displayName": "Record Identity",
+        "purpose": "Record identity role as documented in DESIGN.md."
+      },
+      "metadata": {
+        "displayName": "Metadata",
+        "purpose": "Metadata role as documented in DESIGN.md."
+      },
+      "table-label": {
+        "displayName": "Table Label",
+        "purpose": "Table label role as documented in DESIGN.md."
+      },
+      "brand": {
+        "displayName": "Brand",
+        "purpose": "Desktop header wordmark."
+      },
+      "brand-mobile": {
+        "displayName": "Brand Mobile",
+        "purpose": "Header wordmark at 900px and below."
+      },
+      "brand-caption": {
+        "displayName": "Brand Caption",
+        "purpose": "Small uppercase identity caption, never task or field text."
+      },
+      "supporting-small": {
+        "displayName": "Supporting Small",
+        "purpose": "Account role, footer and quiet workspace context only."
+      },
+      "identity-letter": {
+        "displayName": "Identity Letter",
+        "purpose": "Record initial and mobile location title."
+      },
+      "location-title": {
+        "displayName": "Location Title",
+        "purpose": "Desktop location record title."
+      },
+      "input-mobile": {
+        "displayName": "Input Mobile",
+        "purpose": "Mobile text entry fields at 760px and below."
+      },
+      "auth-intro": {
+        "displayName": "Auth Context Heading",
+        "purpose": "Fluid cream-page context heading; 32px at 900px and 28px at 700px, remaining visible on mobile."
+      },
+      "auth-title": {
+        "displayName": "Auth Form Heading",
+        "purpose": "Route-specific login or Partner registration heading; 24px at 700px."
+      },
+      "auth-field": {
+        "displayName": "Auth Field",
+        "purpose": "Native auth input and select text with readable mobile sizing."
+      },
+      "auth-label": {
+        "displayName": "Auth Label",
+        "purpose": "Visible semibold labels for auth fields."
+      }
+    },
+    "shadows": [
+      {
+        "name": "work-panel",
+        "value": "none",
+        "purpose": "Panels use borders and surface tones."
+      }
+    ],
+    "motion": [
+      {
+        "name": "control-state",
+        "value": "background-color 0.16s ease, color 0.16s ease",
+        "purpose": "Buttons and navigation state transitions."
+      },
+      {
+        "name": "drawer",
+        "value": "transform 0.2s ease",
+        "purpose": "Mobile navigation slide."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation: none !important; transition: none !important",
+        "purpose": "Applied under prefers-reduced-motion: reduce."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "shell-gutters",
+        "value": "1100px"
+      },
+      {
+        "name": "location-form-stack",
+        "value": "1000px"
+      },
+      {
+        "name": "navigation-drawer",
+        "value": "900px"
+      },
+      {
+        "name": "record-stack",
+        "value": "760px"
+      },
+      {
+        "name": "location-heading-stack",
+        "value": "600px"
+      },
+      {
+        "name": "auth-stack",
+        "value": "700px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Primary Button action with visible keyboard focus.",
+      "html": "<button type=\"button\" class=\"ds-primary\">Duyệt hồ sơ</button>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 16px;border:1px solid transparent;border-radius:8px;font-family:Inter,'Segoe UI',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background-color .16s ease,color .16s ease;background:var(--brand-primary,#d3171e);color:#fff;}.ds-primary:hover{background:var(--brand-hover,#ad1117)}.ds-primary:focus-visible{outline:3px solid var(--focus,#a30f16);outline-offset:3px;}.ds-primary:disabled{opacity:.48;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none}}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Secondary Button action with visible keyboard focus.",
+      "html": "<button type=\"button\" class=\"ds-secondary\">Làm mới</button>",
+      "css": ".ds-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 16px;border:1px solid transparent;border-radius:8px;font-family:Inter,'Segoe UI',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background-color .16s ease,color .16s ease;background:#fff;color:#333d4a;border-color:#dce0e6;}.ds-secondary:hover{background:#f0f2f5;border-color:#bbc3ce}.ds-secondary:focus-visible{outline:3px solid var(--focus,#a30f16);outline-offset:3px;}.ds-secondary:disabled{opacity:.48;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "Outlined Rejection",
+      "kind": "button",
+      "refersTo": "button-danger-outline",
+      "description": "Outlined Rejection action with visible keyboard focus.",
+      "html": "<button type=\"button\" class=\"ds-danger-outline\">Từ chối</button>",
+      "css": ".ds-danger-outline{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 16px;border:1px solid transparent;border-radius:8px;font-family:Inter,'Segoe UI',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background-color .16s ease,color .16s ease;background:#fff;color:#b21218;border-color:#efb8bb;}.ds-danger-outline:hover{background:#fff3f3}.ds-danger-outline:focus-visible{outline:3px solid var(--focus,#a30f16);outline-offset:3px;}.ds-danger-outline:disabled{opacity:.48;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-danger-outline{transition:none}}"
+    },
+    {
+      "name": "Labeled Field",
+      "kind": "input",
+      "refersTo": "filter-input",
+      "description": "Warm labeled list filter with visible focus and readable mobile input.",
+      "html": "<label class=\"ds-field\">Tên đơn vị<input placeholder=\"Nhập tên đơn vị\" /></label>",
+      "css": ".ds-field{display:grid;gap:7px;font-family:Inter,'Segoe UI',sans-serif;font-size:12px;font-weight:600;color:#414b58}.ds-field input{width:100%;min-height:46px;padding:10px 12px;border:1px solid #d5dccd;border-radius:8px;background:#fdfefb;color:var(--text-primary,#242824);font-family:Inter,'Segoe UI',sans-serif;font-size:14px;font-weight:400}.ds-field input::placeholder{color:#697382}.ds-field input:hover{border-color:#a4adb9}.ds-field input:focus{border-color:var(--brand-primary,#d3171e)}.ds-field input:focus-visible{outline:3px solid var(--focus,#a30f16);outline-offset:3px;}@media(max-width:760px){.ds-field input{font-size:16px}}"
+    },
+    {
+      "name": "Current Destination",
+      "kind": "nav",
+      "refersTo": "navigation-current",
+      "description": "Current destination in the white desktop horizontal row; mobile uses a charcoal drawer.",
+      "html": "<nav class=\"ds-destinations\" aria-label=\"Quản lý\"><a class=\"ds-current\" href=\"#organizations\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 21V5l8-3 8 3v16M2 21h20M8 8h1m6 0h1M8 12h1m6 0h1M10 21v-5h4v5\"/></svg>Đơn vị vận tải</a></nav>",
+      "css": ".ds-destinations{display:flex;align-items:center;gap:12px;min-height:72px;padding:0 28px;background:var(--surface-panel,#fff);border-bottom:1px solid var(--line,#e3e6de)}.ds-current{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:12px 18px;border-radius:8px;background:var(--brand-primary,#d3171e);color:#fff;font-family:Inter,'Segoe UI',sans-serif;font-size:13px;font-weight:600;text-decoration:none;transition:background-color .16s ease,color .16s ease}.ds-current svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.ds-current:hover{background:var(--brand-hover,#ad1117)}.ds-current:focus-visible{outline:3px solid var(--brand-hover,#ad1117);outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-current{transition:none}}"
+    },
+    {
+      "name": "Pending Status",
+      "kind": "chip",
+      "refersTo": "status-pending",
+      "description": "Noninteractive status with readable label and dot.",
+      "html": "<span class=\"ds-pending\"><span aria-hidden=\"true\"></span>Chờ duyệt</span>",
+      "css": ".ds-pending{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border:1px solid #f5dfac;border-radius:5px;background:#fff8e7;color:#826014;font-family:Inter,'Segoe UI',sans-serif;font-size:11px;font-weight:600;white-space:nowrap}.ds-pending>span{width:5px;height:5px;border-radius:50%;background:currentColor}"
+    },
+    {
+      "name": "Approved Status",
+      "kind": "chip",
+      "refersTo": "status-approved",
+      "description": "Noninteractive status with readable label and dot.",
+      "html": "<span class=\"ds-approved\"><span aria-hidden=\"true\"></span>Đã duyệt</span>",
+      "css": ".ds-approved{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border:1px solid #c5e6d3;border-radius:5px;background:#edf8f1;color:#247347;font-family:Inter,'Segoe UI',sans-serif;font-size:11px;font-weight:600;white-space:nowrap}.ds-approved>span{width:5px;height:5px;border-radius:50%;background:currentColor}"
+    },
+    {
+      "name": "Rejected Status",
+      "kind": "chip",
+      "refersTo": "status-rejected",
+      "description": "Noninteractive status with readable label and dot.",
+      "html": "<span class=\"ds-rejected\"><span aria-hidden=\"true\"></span>Từ chối</span>",
+      "css": ".ds-rejected{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border:1px solid #f2cdd0;border-radius:5px;background:#fdefef;color:#a72732;font-family:Inter,'Segoe UI',sans-serif;font-size:11px;font-weight:600;white-space:nowrap}.ds-rejected>span{width:5px;height:5px;border-radius:50%;background:currentColor}"
+    },
+    {
+      "name": "Work Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Flat bordered surface used for information and review.",
+      "html": "<section class=\"ds-panel\"><h2>Thông tin đăng ký</h2><p>Thông tin hồ sơ và trạng thái xét duyệt.</p></section>",
+      "css": ".ds-panel{padding:28px;border:1px solid #e1e5dc;border-radius:14px;background:var(--surface-panel,#fff);box-shadow:none;color:var(--text-primary,#242824);font-family:Inter,'Segoe UI',sans-serif;}.ds-panel h2{margin:0 0 6px;font-size:21px;font-weight:600;letter-spacing:-.02em}.ds-panel p{margin:0;font-size:14px;line-height:1.55;color:var(--text-secondary,#626963)}"
+    },
+    {
+      "name": "Record Identity",
+      "kind": "custom",
+      "refersTo": "entity-initial",
+      "description": "Initial badge with primary name and supporting record metadata.",
+      "html": "<div class=\"ds-entity\"><span class=\"ds-initial\" aria-hidden=\"true\">V</span><div><a class=\"ds-name\" href=\"#record\">Đơn vị vận tải</a><small>Mã đăng ký: …</small></div></div>",
+      "css": ".ds-entity{display:flex;align-items:center;gap:14px;font-family:Inter,'Segoe UI',sans-serif;}.ds-initial{display:grid;place-items:center;flex:none;width:42px;height:42px;background:#f3f5ee;border:1px solid #e4e8dc;border-radius:9px;font-size:15px;font-weight:600;color:#657154}.ds-name{color:#26313f;font-size:14px;line-height:1.5;font-weight:600;text-decoration:none}.ds-name:hover{color:var(--brand-primary,#d3171e)}.ds-name:focus-visible{outline:3px solid var(--focus,#a30f16);outline-offset:3px;}.ds-entity small{display:block;margin-top:5px;font-size:12px;line-height:1.6;color:#6c7684}"
+    },
+    {
+      "name": "Sysadmin Account Select",
+      "kind": "input",
+      "refersTo": "auth-account-select",
+      "description": "Styled native Admin account selector labeled Tài khoản. Shows Sysadmin by default with its email hidden from presentation; Developer, Data engineer and Accountant have no configured email and cannot submit. The application includes a person icon and a custom chevron. Partner entry uses a business email field.",
+      "html": "<label class=\"ds-auth-label\">Tài khoản<select class=\"ds-auth-select\" autocomplete=\"username\" required><option value=\"sysadmin\" selected>Sysadmin</option><option value=\"developer\">Developer</option><option value=\"data-engineer\">Data engineer</option><option value=\"accountant\">Accountant</option></select></label>",
+      "css": ".ds-auth-label{display:grid;gap:7px;font-family:Inter,'Segoe UI',sans-serif;font-size:13px;font-weight:600;color:var(--text-primary,#242824)}.ds-auth-select{width:100%;min-height:50px;padding:10px 12px;border:1px solid #cbd1d9;border-radius:8px;background:#fff;color:var(--text-primary,#242824);font-family:Inter,'Segoe UI',sans-serif;font-size:15px;font-weight:400;caret-color:var(--red-dark,#ad1117)}.ds-auth-select:hover{border-color:#a4adb9}.ds-auth-select:focus{border-color:var(--red,#d3171e)}.ds-auth-select:focus-visible{outline:3px solid var(--focus,#a30f16);outline-offset:3px}.ds-auth-select[aria-invalid=\"true\"]{border-color:var(--red-dark,#ad1117)}.ds-auth-select:disabled{opacity:.48;cursor:not-allowed}@media(max-width:760px){.ds-auth-select{font-size:16px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Swiss transport wayfinding",
+    "overview": "Clear destinations, aligned records and restrained surfaces define this Management application. A full-width crimson brand header and white horizontal destination row introduce a warm, light workspace. Generous task headings and roomy records make identity, status and next actions easy to scan; gold provides brand punctuation.\n\nThis is the implemented Management system. It complements the shared [VieGo cross-platform design guidance](../../TransConnect-Docs/06-ui/VIEGO_DESIGN_SYSTEM.md), which retains brand and business authority. The user-selected horizontal composition supersedes the earlier desktop rail while preserving the established list-to-detail workflow.",
+    "keyCharacteristics": [
+      "Crimson brand header and white horizontal destinations on desktop.",
+      "Warm white work surfaces, spacious records and a clear task hierarchy.",
+      "Flat bordered panels, restrained corners and labeled semantic statuses.",
+      "Local Vietnamese Inter typography and inline SVG control icons.",
+      "Charcoal navigation retained only as the mobile drawer."
+    ],
+    "rules": [
+      {
+        "name": "The Destination Rule",
+        "body": "Exactly one route-driven current destination uses the solid crimson tile and white label, synchronized with aria-current; desktop destinations sit in the white horizontal row.",
+        "section": "colors"
+      },
+      {
+        "name": "The Brand Continuity Rule",
+        "body": "Retain the established crimson and gold roles when extending Management.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat Work Surface Rule",
+        "body": "Keep resting work panels shadowless; use borders and surface tones to group information.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do retain the crimson header, white desktop destination row and gold brand punctuation.",
+      "Do keep exactly one route-driven current destination.",
+      "Do use local Inter assets and SVG control icons.",
+      "Do preserve visible keyboard focus, labeled statuses and mobile record reflow.",
+      "Do place detail information and review ahead of secondary history."
+    ],
+    "donts": [
+      "Don't restore a permanent desktop rail within the approved horizontal shell.",
+      "Don't add resting shadows to ordinary work panels.",
+      "Don't replace status labels with color alone.",
+      "Don't treat fixture screenshots as evidence of live backend acceptance.",
+      "Don't promote legacy decorative labels into a reusable heading pattern."
+    ]
+  }
+}

@@ -1,0 +1,340 @@
+.access-page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: #f7f5f0;
+  color: var(--text-primary);
+  border-top: 6px solid var(--red);
+}
+.access-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 5vw;
+  border-bottom: 1px solid #e1ddd5;
+}
+.access-header > span:not(.brand),
+.access-footer {
+  color: #625e58;
+  font-size: 12px;
+}
+.access-content {
+  width: min(1120px, 90%);
+  margin: auto;
+  padding: 56px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+  align-items: center;
+  gap: clamp(40px, 7vw, 104px);
+}
+.access-intro h2 {
+  font-size: clamp(30px, 3.2vw, 46px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.22;
+  margin: 0 0 22px;
+  text-wrap: balance;
+}
+.access-intro h2 em {
+  color: var(--red-dark);
+  font-style: normal;
+}
+.access-intro > p {
+  color: #625e58;
+  max-width: 45ch;
+  margin: 0 0 36px;
+  line-height: 1.8;
+}
+.access-portals {
+  display: grid;
+  border-top: 1px solid #d9d4ca;
+}
+.access-portal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 12px;
+  color: #4b4741;
+  border-bottom: 1px solid #d9d4ca;
+  text-decoration: none;
+  transition: background-color 160ms ease;
+}
+.access-portal:hover {
+  background: #efece5;
+}
+.access-portal[aria-current='page'] {
+  color: var(--red-dark);
+  background: #f1e7df;
+}
+.access-portal > svg {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+}
+.access-portal > span:first-of-type {
+  flex: 1;
+  min-width: 0;
+}
+.access-portal strong,
+.access-portal small {
+  display: block;
+}
+.access-portal strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+.access-portal small {
+  margin-top: 4px;
+  color: #625e58;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.access-selection {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  border: 1px solid #aaa297;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+.access-selection svg {
+  width: 15px;
+  visibility: hidden;
+}
+.access-portal[aria-current='page'] .access-selection {
+  background: var(--red-dark);
+  border-color: var(--red-dark);
+  color: white;
+}
+.access-portal[aria-current='page'] .access-selection svg {
+  visibility: visible;
+}
+.access-portal[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: wait;
+}
+.access-partner-note {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  color: #625e58;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.access-partner-note > svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--red-dark);
+}
+.access-partner-note p {
+  margin: 0;
+}
+.access-partner-note strong {
+  color: #393630;
+  font-weight: 600;
+}
+.access-form-area {
+  background: white;
+  border: 1px solid #e1ddd5;
+  border-radius: 16px;
+  padding: 36px;
+  min-width: 0;
+}
+.access-page .login-card {
+  max-width: none;
+}
+.access-form-icon {
+  display: inline-flex;
+  color: var(--red-dark);
+  margin-bottom: 20px;
+}
+.access-form-icon svg {
+  width: 28px;
+  height: 28px;
+}
+.access-page .login-card h1 {
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  line-height: 1.3;
+  margin: 0 0 12px;
+}
+.access-page .login-card > p {
+  font-size: 13px;
+  line-height: 1.75;
+  margin: 0 0 28px;
+}
+.access-page .login-card label {
+  font-size: 13px;
+  font-weight: 600;
+}
+.access-page .login-card input,
+.access-page .login-card select {
+  width: 100%;
+  min-height: 50px;
+  font-size: 15px;
+  caret-color: var(--red-dark);
+}
+.access-page .login-card select[aria-invalid='true'] {
+  border-color: var(--red-dark);
+}
+.system-account-select {
+  position: relative;
+}
+.access-page .system-account-select select {
+  appearance: none;
+  padding: 12px 44px;
+  background: #fafaf7;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+.access-page .system-account-select select:hover:not(:disabled) {
+  background: #f7f5f0;
+  border-color: #aaa297;
+}
+.access-page .system-account-select select:focus-visible {
+  border-color: var(--red-dark);
+  background: white;
+}
+.system-account-select > svg {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: var(--red-dark);
+  width: 19px;
+  height: 19px;
+  pointer-events: none;
+}
+.system-account-select > .system-account-chevron {
+  left: auto;
+  right: 15px;
+  transform: translateY(-50%) rotate(90deg);
+  color: #625e58;
+  width: 16px;
+  height: 16px;
+}
+.system-account-status {
+  margin: 10px 0 0;
+  color: #625e58;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.access-page .login-field {
+  margin: 0;
+}
+.access-page .login-submit {
+  min-height: 50px;
+  margin-top: 26px;
+}
+.access-register {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 10px;
+  padding: 20px 0;
+  margin-top: 8px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  align-items: center;
+}
+.access-register button {
+  min-height: 44px;
+}
+.access-page .login-card .session-note {
+  margin: 22px 0 0;
+  font-size: 12px;
+}
+.access-page .login-card .login-help {
+  margin: 14px 0 0;
+  font-size: 12px;
+}
+.access-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 5vw;
+  border-top: 1px solid #e1ddd5;
+}
+@media (max-width: 900px) {
+  .access-content {
+    gap: 32px;
+    width: 92%;
+  }
+  .access-form-area {
+    padding: 28px;
+  }
+  .access-intro h2 {
+    font-size: 32px;
+  }
+}
+@media (max-width: 700px) {
+  .access-header {
+    padding: 20px;
+  }
+  .access-header > span:not(.brand),
+  .access-footer > span:last-child,
+  .access-partner-note {
+    display: none;
+  }
+  .access-content {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    padding: 28px 20px 36px;
+    gap: 28px;
+  }
+  .access-intro h2 {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  .access-intro > p {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  .access-portals {
+    display: flex;
+    border: 1px solid #d9d4ca;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .access-portal {
+    flex: 1;
+    padding: 14px 10px;
+    border: 0;
+    gap: 8px;
+  }
+  .access-portal + .access-portal {
+    border-left: 1px solid #d9d4ca;
+  }
+  .access-portal > svg {
+    flex-basis: 18px;
+    width: 18px;
+    height: 18px;
+  }
+  .access-portal strong {
+    font-size: 12px;
+  }
+  .access-portal small,
+  .access-selection {
+    display: none;
+  }
+  .access-form-area {
+    padding: 24px;
+  }
+  .access-page .login-card h1 {
+    font-size: 24px;
+  }
+  .access-page .login-card input,
+  .access-page .login-card select {
+    font-size: 16px;
+  }
+  .access-footer {
+    padding: 20px;
+  }
+}

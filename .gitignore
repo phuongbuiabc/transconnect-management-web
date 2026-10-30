@@ -8,3 +8,6 @@ dist/
 
 .npm-cache/
 *.log
+.ui-artifacts/
+.impeccable/review/
+.impeccable/questions/

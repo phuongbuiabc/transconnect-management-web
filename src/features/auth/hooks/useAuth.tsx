@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 import { session } from '../../../core/api/client';
 import { authApi } from '../api/authApi';
 import type { User } from '../models/user';
+import { ApiError } from '../../../core/api/apiError';
 interface Auth {
   user: User | null;
   loading: boolean;
@@ -19,38 +20,50 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(session.hasTokens());
   const [error, setError] = useState<unknown>(null);
   async function restore() {
+    const expected = session.generation;
     setLoading(true);
     setError(null);
     try {
       const current = await authApi.currentUser();
-      setUser(current);
+      if (session.generation === expected) setUser(current);
     } catch (failure) {
-      setUser(null);
-      setError(failure);
+      if (session.generation === expected) {
+        setUser(null);
+        setError(failure);
+      }
     } finally {
-      setLoading(false);
+      if (session.generation === expected) setLoading(false);
     }
   }
   useEffect(() => {
     let active = true;
-    const unsubscribe = session.subscribe(() => {
-      if (active) {
-        setUser(null);
-        setLoading(false);
-      }
-    });
-    if (session.hasTokens())
+    function loadCurrent() {
+      const expected = session.generation;
+      setLoading(true);
+      setError(null);
       authApi
         .currentUser()
         .then((current) => {
-          if (active) setUser(current);
+          if (active && session.generation === expected) setUser(current);
         })
         .catch((failure) => {
-          if (active) setError(failure);
+          if (active && session.generation === expected) setError(failure);
         })
         .finally(() => {
-          if (active) setLoading(false);
+          if (active && session.generation === expected) setLoading(false);
         });
+    }
+    const unsubscribe = session.subscribe(() => {
+      if (active) {
+        setUser(null);
+        if (session.hasTokens()) loadCurrent();
+        else {
+          setLoading(false);
+          setError(null);
+        }
+      }
+    });
+    if (session.hasTokens()) loadCurrent();
     return () => {
       active = false;
       unsubscribe();
@@ -76,12 +89,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     },
     signIn: async (email, password, accountGroup) => {
       await authApi.login(email, password, accountGroup);
+      const expected = session.generation;
       try {
         const current = await authApi.currentUser();
+        session.sync();
+        if (session.generation !== expected)
+          throw new ApiError(401, 'Phiên đăng nhập đã thay đổi.');
         setError(null);
         setUser(current);
       } catch (failure) {
-        session.clear();
+        session.sync();
+        if (session.generation === expected) session.clear();
         throw failure;
       }
     },

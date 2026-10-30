@@ -6,6 +6,7 @@ import { EngagementContact } from './EngagementContact';
 import type { Membership, Vehicle } from '../models/foundation';
 import { ErrorNotice, Loading } from '../../../shared/ui';
 import type { Organization } from '../../organizations/models/organization';
+import { LocationsPage } from '../../locations/pages/LocationsPage';
 export function OrganizationWorkspace({ membership }: { membership: Membership }) {
   const [tab, setTab] = useState('drivers');
   const owner = membership.role === 'OrganizationOwner';
@@ -26,6 +27,7 @@ export function OrganizationWorkspace({ membership }: { membership: Membership }
           <>
             <button onClick={() => setTab('members')}>Nhân viên / lời mời</button>
             <button onClick={() => setTab('profile')}>Thông tin tổ chức</button>
+            <button onClick={() => setTab('locations')}>Địa điểm</button>
           </>
         ) : null}
       </nav>
@@ -35,6 +37,9 @@ export function OrganizationWorkspace({ membership }: { membership: Membership }
       ) : null}
       {tab === 'members' && owner ? <Members id={membership.organizationId} /> : null}
       {tab === 'profile' && owner ? <OrganizationProfile id={membership.organizationId} /> : null}
+      {tab === 'locations' && owner ? (
+        <LocationsPage organizationId={membership.organizationId} />
+      ) : null}
     </section>
   );
 }

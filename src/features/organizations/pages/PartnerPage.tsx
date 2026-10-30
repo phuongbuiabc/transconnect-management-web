@@ -3,14 +3,14 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { useOrganizations } from '../hooks/useOrganizations';
 import { useApplication } from '../hooks/useApplication';
-import { ErrorNotice, Loading } from '../../../shared/ui';
+import { Brand, ErrorNotice, Loading } from '../../../shared/ui';
 import { PartnerWorkspace } from '../../foundation/pages/PartnerWorkspace';
 import { AccountSettings } from '../../auth/pages/AccountSettings';
 import { ReviewHistory } from '../../foundation/components/ReviewHistory';
 export function PartnerPage() {
   const auth = useAuth();
   if (auth.loading) return <Loading />;
-  if (!auth.user) return <Navigate to="/login" replace />;
+  if (!auth.user) return <Navigate to="/login/partner" replace />;
   if (auth.user.accountGroup !== 'Operator') return <Navigate to="/admin" replace />;
   return <PartnerContent />;
 }
@@ -42,9 +42,17 @@ function PartnerContent() {
     }
   }
   return (
-    <main className="content foundation-workspace">
-      <h1>Cổng đối tác vận tải</h1>
-      <p>{auth.user?.fullName}</p>
+    <main className="partner-page foundation-workspace">
+      <header className="partner-header">
+        <Brand />
+        <span className="count">Không gian đối tác</span>
+      </header>
+      <div className="partner-overview">
+        <div>
+          <h1>Cổng đối tác vận tải</h1>
+          <p>Chào {auth.user?.fullName}. Quản lý hồ sơ và đơn vị bạn tham gia.</p>
+        </div>
+      </div>
       <AccountSettings />
       {auth.user?.emailVerified ? <PartnerWorkspace /> : null}
       <button className="button secondary" onClick={() => void auth.signOut().catch(setError)}>

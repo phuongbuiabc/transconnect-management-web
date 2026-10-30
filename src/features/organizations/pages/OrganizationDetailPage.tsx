@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { ErrorNotice, Loading } from '../../../shared/ui';
+import { Icon } from '../../../shared/ui/Icon';
 import { Status } from '../components/OrganizationStatus';
 import { useOrganization } from '../hooks/useOrganization';
 import { ReviewHistory } from '../../foundation/components/ReviewHistory';
@@ -25,7 +26,7 @@ export function OrganizationDetail() {
   return (
     <>
       <Link className="back-link" to="/admin/organizations">
-        ← Danh sách đơn vị vận tải
+        <Icon name="left" /> Danh sách đơn vị vận tải
       </Link>
       {loading ? (
         <Loading />
@@ -35,7 +36,6 @@ export function OrganizationDetail() {
         <>
           <div className="page-heading">
             <div>
-              <p className="eyebrow">HỒ SƠ ĐỐI TÁC</p>
               <h1>{item.name}</h1>
               <p className="reference">Mã hồ sơ: {item.id}</p>
             </div>
@@ -47,11 +47,6 @@ export function OrganizationDetail() {
             </div>
           ) : null}
           <div className="detail-grid">
-            {!item.createdByUserId ? (
-              <LegacyApplication key={item.reviewStatus} organization={item} reload={reload} />
-            ) : null}
-            {item.reviewStatus === 'Approved' ? <AdminVehicleLink id={item.id} /> : null}
-            <ReviewHistory key={item.reviewStatus} type="organizations" id={item.id} />
             <section className="panel detail-panel">
               <h2>Thông tin đăng ký</h2>
               <dl>
@@ -80,7 +75,6 @@ export function OrganizationDetail() {
               </dl>
             </section>
             <section className="panel detail-panel review-panel">
-              <p className="eyebrow">XÉT DUYỆT</p>
               <h2>{item.reviewStatus === 'Pending' ? 'Đánh giá hồ sơ' : 'Kết quả xét duyệt'}</h2>
               {item.reviewStatus === 'Pending' ? (
                 <>
@@ -173,6 +167,13 @@ export function OrganizationDetail() {
                 </>
               )}
             </section>
+            <div className="detail-history">
+              <ReviewHistory key={item.reviewStatus} type="organizations" id={item.id} />
+            </div>
+            {!item.createdByUserId ? (
+              <LegacyApplication key={item.reviewStatus} organization={item} reload={reload} />
+            ) : null}
+            {item.reviewStatus === 'Approved' ? <AdminVehicleLink id={item.id} /> : null}
           </div>
         </>
       ) : null}

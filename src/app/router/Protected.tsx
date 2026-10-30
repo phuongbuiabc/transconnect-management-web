@@ -32,10 +32,14 @@ export function Protected() {
     auth.user.accountGroup !== 'InternalAdmin' ||
     !(location.pathname === '/admin'
       ? auth.user.permissions.some((permission) =>
-          ['organizations.manage', 'users.manage'].includes(permission),
+          ['organizations.manage', 'users.manage', 'locations.manage'].includes(permission),
         )
       : auth.user.permissions.includes(
-          location.pathname.startsWith('/admin/accounts') ? 'users.manage' : 'organizations.manage',
+          location.pathname.startsWith('/admin/locations')
+            ? 'locations.manage'
+            : location.pathname.startsWith('/admin/accounts')
+              ? 'users.manage'
+              : 'organizations.manage',
         ))
   )
     return <Denied />;

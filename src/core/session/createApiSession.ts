@@ -2,14 +2,34 @@ import { ApiError } from '../api/apiError';
 import { createTransport } from '../api/transport';
 import { isTokens, type Tokens } from './tokens';
 export type TokenStorage = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
-export function createApiSession(baseUrl: string, storage?: TokenStorage) {
+export interface SessionCoordination {
+  syncStorage?: boolean;
+  withRefreshLock?: (work: () => Promise<void>) => Promise<void>;
+}
+export function createApiSession(
+  baseUrl: string,
+  storage?: TokenStorage,
+  coordination: SessionCoordination = {},
+) {
   const transport = createTransport(baseUrl);
   const KEY = 'transconnect.admin.session';
   let tokens: Tokens | null = null;
-  try {
-    const saved = storage?.getItem(KEY);
+  let identity: string | null = null;
+  let savedValue: string | null = null;
+  function decode(saved: string | null) {
     const value: unknown = saved ? JSON.parse(saved) : null;
-    if (isTokens(value)) tokens = value;
+    if (!isTokens(value)) return { tokens: null, identity: null };
+    return {
+      tokens: value,
+      identity:
+        'sessionId' in value && typeof value.sessionId === 'string' ? value.sessionId : 'legacy',
+    };
+  }
+  try {
+    savedValue = storage?.getItem(KEY) ?? null;
+    const loaded = decode(savedValue);
+    tokens = loaded.tokens;
+    identity = loaded.identity;
   } catch {
     /* Storage can be unavailable in restricted browsers. */
   }
@@ -18,7 +38,31 @@ export function createApiSession(baseUrl: string, storage?: TokenStorage) {
   let refreshFlight: Promise<void> | null = null;
   let refreshGeneration: number | null = null;
   const listeners = new Set<() => void>();
+  function syncStorage() {
+    if (!coordination.syncStorage || !storage) return;
+    let value: string | null;
+    try {
+      value = storage.getItem(KEY);
+    } catch {
+      return;
+    }
+    if (value === savedValue) return;
+    let next;
+    try {
+      next = decode(value);
+    } catch {
+      next = { tokens: null, identity: null };
+    }
+    const changedIdentity = identity !== next.identity || Boolean(tokens) !== Boolean(next.tokens);
+    epoch++;
+    if (changedIdentity) generation++;
+    savedValue = value;
+    tokens = next.tokens;
+    identity = next.identity;
+    if (changedIdentity) listeners.forEach((listener) => listener());
+  }
   const session = {
+    sync: syncStorage,
     get generation() {
       return generation;
     },
@@ -34,8 +78,10 @@ export function createApiSession(baseUrl: string, storage?: TokenStorage) {
       epoch++;
       if (!rotated) generation++;
       tokens = next;
+      if (!rotated || !identity) identity = crypto.randomUUID();
+      savedValue = JSON.stringify({ ...next, sessionId: identity });
       try {
-        storage?.setItem(KEY, JSON.stringify(next));
+        storage?.setItem(KEY, savedValue);
       } catch {
         /* Keep an in-memory session. */
       }
@@ -44,6 +90,8 @@ export function createApiSession(baseUrl: string, storage?: TokenStorage) {
       epoch++;
       generation++;
       tokens = null;
+      identity = null;
+      savedValue = null;
       try {
         storage?.removeItem(KEY);
       } catch {
@@ -55,17 +103,25 @@ export function createApiSession(baseUrl: string, storage?: TokenStorage) {
   async function refresh(): Promise<void> {
     if (refreshFlight && refreshGeneration === generation) return refreshFlight;
     const current = tokens;
-    const startEpoch = epoch;
+    const startGeneration = generation;
     if (!current) throw new ApiError(401, 'Vui lòng đăng nhập lại.');
-    const pending = (async () => {
+    const run = coordination.withRefreshLock ?? (async (work: () => Promise<void>) => work());
+    const pending = run(async () => {
+      syncStorage();
+      if (generation !== startGeneration || !tokens)
+        throw new ApiError(401, 'Phiên đăng nhập đã thay đổi.');
+      if (tokens.accessToken !== current.accessToken) return;
+      const startEpoch = epoch;
       try {
         const next = await transport<Tokens>('/auth/refresh', {
           method: 'POST',
           body: JSON.stringify({ refreshToken: current.refreshToken }),
         });
+        syncStorage();
         if (epoch !== startEpoch) throw new ApiError(401, 'Phiên đăng nhập đã thay đổi.');
         session.set(next, true);
       } catch (error) {
+        syncStorage();
         if (
           epoch === startEpoch &&
           error instanceof ApiError &&
@@ -74,7 +130,7 @@ export function createApiSession(baseUrl: string, storage?: TokenStorage) {
           session.clear();
         throw error;
       }
-    })();
+    });
     refreshFlight = pending;
     refreshGeneration = generation;
     try {
@@ -92,13 +148,18 @@ export function createApiSession(baseUrl: string, storage?: TokenStorage) {
     authenticated = true,
   ): Promise<T> {
     const startGeneration = generation;
+    syncStorage();
+    if (authenticated && generation !== startGeneration)
+      throw new ApiError(401, 'Phiên đăng nhập đã thay đổi.');
     const bearer = tokens?.accessToken;
     try {
       const value = await transport<T>(path, init, authenticated ? bearer : undefined);
+      syncStorage();
       if (authenticated && generation !== startGeneration)
         throw new ApiError(401, 'Phiên đăng nhập đã thay đổi.');
       return value;
     } catch (error) {
+      syncStorage();
       if (
         generation !== startGeneration ||
         !authenticated ||
@@ -115,9 +176,12 @@ export function createApiSession(baseUrl: string, storage?: TokenStorage) {
       const retryGeneration = generation;
       try {
         const value = await transport<T>(path, init, tokens?.accessToken);
+        syncStorage();
         if (generation !== retryGeneration) throw new ApiError(401, 'Phiên đăng nhập đã thay đổi.');
         return value;
       } catch (retryError) {
+        syncStorage();
+        if (generation !== retryGeneration) throw new ApiError(401, 'Phiên đăng nhập đã thay đổi.');
         if (retryError instanceof ApiError && retryError.status === 401 && epoch === retryEpoch)
           session.clear();
         throw retryError;
@@ -125,6 +189,7 @@ export function createApiSession(baseUrl: string, storage?: TokenStorage) {
     }
   }
   async function logout(): Promise<void> {
+    syncStorage();
     const current = tokens;
     session.clear();
     if (current)

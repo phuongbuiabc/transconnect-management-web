@@ -8,13 +8,15 @@
     "build": "tsc --noEmit && vite build --configLoader runner",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
-    "test": "node --test tests/api.test.mjs",
+    "test": "node --test tests/api.test.mjs tests/persistence.test.mjs",
+    "check:ui": "node scripts/check-ui.mjs",
     "lint": "eslint .",
-    "format": "prettier --write src tests *.ts *.js *.json",
-    "format:check": "prettier --check src tests *.ts *.js *.json",
+    "format": "prettier --write src tests scripts *.ts *.js *.json",
+    "format:check": "prettier --check src tests scripts *.ts *.js *.json",
     "check": "npm run format:check && npm run lint && npm run test && npm run build"
   },
   "dependencies": {
+    "leaflet": "1.9.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.0"
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@tailwindcss/vite": "^4.0.0",
+    "@types/leaflet": "1.9.21",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
