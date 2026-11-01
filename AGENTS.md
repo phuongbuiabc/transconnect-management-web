@@ -1,3 +1,7 @@
+## Điểm vào hiện hành — 01/11/2026
+
+Khi đổi tài khoản/agent, đọc [bàn giao](../../TransConnect-Docs/00-project/agent-handoff.md) và checkpoint `agent-current-state` trong progress-tracker Docs trước các mục lịch sử bên dưới. Kiểm tra source/Git thực tế: nhiều module/feature mới chưa commit; không reset/clean hoặc coi HEAD là toàn bộ code. Các ghi chú “chưa code/chưa import/Driver không đổi” cũ không ghi đè checkpoint mới. Hướng dẫn chung ở [AGENTS workspace](../../AGENTS.md).
+
 # Management frontend
 
 - Locations 27/10 đã được người dùng giao triển khai: Admin `/admin/locations`, Owner qua workspace tổ chức; feature riêng, Leaflet 1.9.4, nhập tay/xác nhận và lịch sử. Source/lockfile đã có; xem Backend/docs/reference/locations-setup.md và contract Docs/05-api/endpoints/locations-endpoints.md. Phạm vi địa giới toàn quốc; không coi code/build là nghiệm thu SQL Server/tiles thật, kết quả ở tracker.

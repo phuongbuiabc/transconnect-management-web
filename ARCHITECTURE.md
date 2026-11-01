@@ -45,6 +45,8 @@ Cập nhật Locations 27/10: `features/locations` sở hữu API/model/hook, fo
 
 ## Chạy và kiểm tra
 
+LOC-MAP-02: `LocationMap` giữ ref TileLayer để nút “Thử tải lại bản đồ” gọi `redraw()` khi tile lỗi. Thử lại chỉ nạp ảnh nền, không remount form hoặc đổi tọa độ/phương thức xác nhận/API. Browser regression `--locations` inject ảnh nền test-only và kiểm tra tile lỗi → phục hồi giữ tọa độ; `--live-tiles` tách kiểm tra provider/DNS thật. Cấu hình DNS Chrome thuộc máy người dùng, không nằm trong Vite/API config.
+
 Node >=22.14.0, `npm ci`, `npm run dev` (5173). `.env.example` chứa VITE_API_BASE_URL=http://localhost:5267; biến VITE là public, không chứa secret. Vite dùng configLoader runner để nạp config trực tiếp và tránh bước bundle config không cần thiết.
 
 `npm run check`: Prettier check → ESLint → Node API tests → TypeScript check + Vite production build. `npm run format` để format. Thêm test hành vi khi đổi transport/session hoặc thao tác nghiệp vụ; E2E/browser và BE live được ghi riêng trong tracker, không suy từ build/mock test.

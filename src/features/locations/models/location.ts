@@ -1,3 +1,12 @@
+export interface PlaceSearchResult {
+  sourceId: string;
+  name: string;
+  displayName: string;
+  latitude: number;
+  longitude: number;
+  source: string;
+}
+
 export interface AdministrativeUnit {
   code: string;
   name: string;

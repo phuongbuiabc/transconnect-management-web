@@ -2,7 +2,7 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  background: #f7f5f0;
+  background: #f6f7f8;
   color: var(--text-primary);
   border-top: 6px solid var(--red);
 }
@@ -12,12 +12,16 @@
   align-items: center;
   gap: 24px;
   padding: 28px 5vw;
-  border-bottom: 1px solid #e1ddd5;
+  border-bottom: 1px solid #e3e5e8;
 }
 .access-header > span:not(.brand),
 .access-footer {
   color: #625e58;
-  font-size: 12px;
+  font-size: 13px;
+}
+.access-page .brand small {
+  font-size: 11px;
+  letter-spacing: 0.04em;
 }
 .access-content {
   width: min(1120px, 90%);
@@ -29,15 +33,15 @@
   gap: clamp(40px, 7vw, 104px);
 }
 .access-intro h2 {
-  font-size: clamp(30px, 3.2vw, 46px);
+  font-size: clamp(28px, 2.5vw, 36px);
   font-weight: 600;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.025em;
   line-height: 1.22;
   margin: 0 0 22px;
   text-wrap: balance;
 }
 .access-intro h2 em {
-  color: var(--red-dark);
+  color: inherit;
   font-style: normal;
 }
 .access-intro > p {
@@ -48,7 +52,7 @@
 }
 .access-portals {
   display: grid;
-  border-top: 1px solid #d9d4ca;
+  border-top: 1px solid #e3e5e8;
 }
 .access-portal {
   position: relative;
@@ -57,16 +61,16 @@
   gap: 16px;
   padding: 22px 12px;
   color: #4b4741;
-  border-bottom: 1px solid #d9d4ca;
+  border-bottom: 1px solid #e3e5e8;
   text-decoration: none;
   transition: background-color 160ms ease;
 }
 .access-portal:hover {
-  background: #efece5;
+  background: #eceef1;
 }
 .access-portal[aria-current='page'] {
   color: var(--red-dark);
-  background: #f1e7df;
+  background: #fbecee;
 }
 .access-portal > svg {
   flex: 0 0 24px;
@@ -88,7 +92,7 @@
 .access-portal small {
   margin-top: 4px;
   color: #625e58;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.6;
 }
 .access-selection {
@@ -122,7 +126,7 @@
   gap: 12px;
   margin-top: 32px;
   color: #625e58;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.8;
 }
 .access-partner-note > svg {
@@ -139,7 +143,7 @@
 }
 .access-form-area {
   background: white;
-  border: 1px solid #e1ddd5;
+  border: 1px solid #e3e5e8;
   border-radius: 16px;
   padding: 36px;
   min-width: 0;
@@ -163,7 +167,7 @@
   margin: 0 0 12px;
 }
 .access-page .login-card > p {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.75;
   margin: 0 0 28px;
 }
@@ -187,7 +191,7 @@
 .access-page .system-account-select select {
   appearance: none;
   padding: 12px 44px;
-  background: #fafaf7;
+  background: #fafafb;
   font-weight: 600;
   cursor: pointer;
   transition:
@@ -195,7 +199,7 @@
     background-color 160ms ease;
 }
 .access-page .system-account-select select:hover:not(:disabled) {
-  background: #f7f5f0;
+  background: #f0f1f3;
   border-color: #aaa297;
 }
 .access-page .system-account-select select:focus-visible {
@@ -223,7 +227,7 @@
 .system-account-status {
   margin: 10px 0 0;
   color: #625e58;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.7;
 }
 .access-page .login-field {
@@ -249,23 +253,49 @@
 }
 .access-page .login-card .session-note {
   margin: 22px 0 0;
-  font-size: 12px;
+  font-size: 13px;
 }
 .access-page .login-card .login-help {
   margin: 14px 0 0;
-  font-size: 12px;
+  font-size: 13px;
 }
 .access-footer {
   display: flex;
   justify-content: space-between;
   gap: 20px;
   padding: 22px 5vw;
-  border-top: 1px solid #e1ddd5;
+  border-top: 1px solid #e3e5e8;
 }
 @media (max-width: 900px) {
   .access-content {
     gap: 32px;
-    width: 92%;
+    width: 90%;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 600px;
+    padding-block: 32px;
+  }
+  .access-intro > p {
+    margin-bottom: 20px;
+  }
+  .access-portals {
+    display: flex;
+    border: 1px solid #e3e5e8;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .access-portal {
+    flex: 1;
+    padding: 14px 12px;
+    border: 0;
+    gap: 10px;
+  }
+  .access-portal + .access-portal {
+    border-left: 1px solid #e3e5e8;
+  }
+  .access-portal small,
+  .access-selection,
+  .access-partner-note {
+    display: none;
   }
   .access-form-area {
     padding: 28px;
@@ -299,7 +329,7 @@
   }
   .access-portals {
     display: flex;
-    border: 1px solid #d9d4ca;
+    border: 1px solid #e3e5e8;
     border-radius: 8px;
     overflow: hidden;
   }
@@ -310,7 +340,7 @@
     gap: 8px;
   }
   .access-portal + .access-portal {
-    border-left: 1px solid #d9d4ca;
+    border-left: 1px solid #e3e5e8;
   }
   .access-portal > svg {
     flex-basis: 18px;
@@ -318,7 +348,7 @@
     height: 18px;
   }
   .access-portal strong {
-    font-size: 12px;
+    font-size: 13px;
   }
   .access-portal small,
   .access-selection {

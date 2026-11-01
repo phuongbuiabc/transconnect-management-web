@@ -215,6 +215,60 @@
   font-size: 12px;
   color: var(--muted);
 }
+.location-map-error {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+}
+.place-search {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.place-search-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.place-search-controls input {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+.place-search small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.place-search a {
+  text-decoration: underline;
+}
+.place-search-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.place-search-results button {
+  display: grid;
+  gap: 4px;
+  text-align: left;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+}
+.place-search-results button:hover {
+  background: var(--surface-subtle);
+}
+.place-search-results span {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
 @media (max-width: 1000px) {
   .locations-form-grid {
     grid-template-columns: 1fr;

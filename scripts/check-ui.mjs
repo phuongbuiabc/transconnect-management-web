@@ -7,10 +7,12 @@ import { extname, resolve, sep } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
 import { checkAdmin } from './check-admin-ui.mjs';
 import { checkSession } from './check-session-ui.mjs';
+import { checkLocations } from './check-location-ui.mjs';
 
 // Dependency-free Chromium fallback until the project's Playwright connection is available.
 // All API fetches are replaced before application startup. No real session or DB is used.
 let baseUrl = process.env.UI_BASE_URL;
+const waitAttempts = baseUrl ? 300 : 60;
 let preview;
 const browserPath =
   process.env.UI_BROWSER_PATH ||
@@ -25,7 +27,16 @@ assert.ok(
   'Set UI_BROWSER_PATH to an installed Chromium browser',
 );
 const baseline = process.argv.includes('--baseline');
-const output = resolve('.ui-artifacts', baseline ? 'before' : 'after');
+const output = resolve(
+  '.ui-artifacts',
+  process.argv.includes('--locations')
+    ? baseUrl
+      ? 'locations-dev'
+      : 'locations'
+    : baseline
+      ? 'before'
+      : 'after',
+);
 await mkdir(output, { recursive: true });
 if (!baseUrl) {
   const dist = resolve('dist');
@@ -85,6 +96,8 @@ const browser = spawn(
 );
 const pending = new Map();
 const errors = [];
+const mapNetwork = [];
+const mapRequests = new Map();
 const checks = [];
 let nextId = 0;
 let sessionId;
@@ -114,12 +127,32 @@ browser.stdio[4].on('data', (chunk) => {
       pending.delete(message.id);
       if (message.error) request.reject(new Error(JSON.stringify(message.error)));
       else request.resolve(message.result);
+    } else if (message.method === 'Network.requestWillBeSent') {
+      const url = new URL(message.params.request.url);
+      if (message.params.type === 'Image' && ['http:', 'https:'].includes(url.protocol))
+        mapRequests.set(message.params.requestId, url.origin + url.pathname);
+    } else if (message.method === 'Network.responseReceived') {
+      const path = mapRequests.get(message.params.requestId);
+      if (path) mapNetwork.push({ path, status: message.params.response.status });
+    } else if (message.method === 'Network.loadingFailed') {
+      const path = mapRequests.get(message.params.requestId);
+      if (path) mapNetwork.push({ path, error: message.params.errorText });
     } else if (message.method === 'Runtime.exceptionThrown') {
-      errors.push(message.params.exceptionDetails.text);
-    } else if (message.method === 'Runtime.consoleAPICalled' && message.params.type === 'error') {
       errors.push(
-        message.params.args.map((argument) => argument.value || argument.description).join(' '),
+        message.params.exceptionDetails.exception?.description ||
+          message.params.exceptionDetails.text,
       );
+    } else if (message.method === 'Runtime.consoleAPICalled') {
+      const detail = message.params.args
+        .map((argument) => argument.value || argument.description)
+        .join(' ');
+      if (
+        message.params.type === 'error' ||
+        /MaxListenersExceededWarning|ObjectMultiplex|app-init-liveness|background-liveness/.test(
+          detail,
+        )
+      )
+        errors.push(detail);
     }
   }
 });
@@ -153,7 +186,7 @@ async function evaluate(expression) {
   return result.result.value;
 }
 async function waitFor(expression) {
-  for (let attempt = 0; attempt < 60; attempt++) {
+  for (let attempt = 0; attempt < waitAttempts; attempt++) {
     if (await evaluate(expression)) return;
     await delay(100);
   }
@@ -224,6 +257,7 @@ try {
     .sessionId;
   await send('Page.enable');
   await send('Runtime.enable');
+  if (process.argv.includes('--locations')) await send('Network.enable');
   await send('Page.addScriptToEvaluateOnNewDocument', {
     source: `
     sessionStorage.clear();
@@ -438,8 +472,11 @@ try {
     await capture('login-error-desktop', 1440, 1000);
     assert.deepEqual(errors, [], 'No browser exceptions or console errors');
   }
-  if (process.argv.includes('--admin')) {
+  if (process.argv.includes('--admin') || process.argv.includes('--locations')) {
     await checkAdmin({ send, evaluate, click, waitFor, output, baseline, baseUrl, checks });
+  }
+  if (process.argv.includes('--locations')) {
+    await checkLocations({ send, evaluate, click, waitFor, baseUrl, output, checks, mapNetwork });
   }
   if (process.argv.includes('--session')) {
     const newPage = async () => {

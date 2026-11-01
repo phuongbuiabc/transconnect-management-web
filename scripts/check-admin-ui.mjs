@@ -38,6 +38,7 @@ export async function checkAdmin({
       else if(path==='/accounts')data=paged([{id:'account-01',fullName:'Trần Hoàng Nam',email:'nam@example.invalid',accountGroup:'Customer',isActive:true}]);
       else if(path==='/drivers/search')data=paged([{id:'driver-01',fullName:'Lê Quốc Huy',reviewStatus:'Pending',contactPhone:'0900000000',contactAddress:'TP. Hồ Chí Minh'}]);
       else if(path==='/locations/admin/shared')data=paged(locations);
+      else if(path==='/locations/place-search')data=[{sourceId:'osm:node:fixture',name:'Bến xe kiểm thử',displayName:'Địa điểm công cộng minh họa, Việt Nam',latitude:10.8791234,longitude:106.8145678,source:'OpenStreetMap'}];
       const failed=window.uiFixture.fail && path!=='/auth/me';
       return new Response(JSON.stringify({succeeded:!failed,data:failed?null:data,message:failed?'Không thể tải dữ liệu thử nghiệm.':null}),{status:failed?500:200,headers:{'Content-Type':'application/json'}});
     };
@@ -91,7 +92,17 @@ export async function checkAdmin({
     });
     await delay(150);
     const scrollWidth = await evaluate('document.documentElement.scrollWidth');
-    checks.push({ name, width, scrollWidth });
+    const metrics = await evaluate(`(() => {
+      const title = document.querySelector('h1');
+      const row = document.querySelector('tbody tr');
+      return {
+        titleSize: title ? parseFloat(getComputedStyle(title).fontSize) : null,
+        firstRowTop: row ? Math.round(row.getBoundingClientRect().top) : null,
+        navigationFolded: document.querySelector('.sidebar').inert,
+        fontLoaded: document.fonts.check('14px Inter'),
+      };
+    })()`);
+    checks.push({ name, width, scrollWidth, ...metrics });
     await writeFile(
       resolve(output, name + '.png'),
       Buffer.from(
@@ -109,6 +120,8 @@ export async function checkAdmin({
     }
   }
   await capture('admin-organizations-desktop', 1440, 1000);
+  await capture('admin-organizations-tablet', 768, 1024);
+  await capture('admin-organizations-small', 320, 740);
   await capture('admin-organizations-mobile', 390, 844);
   if (!baseline) {
     assert.ok(

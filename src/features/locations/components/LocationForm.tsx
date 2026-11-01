@@ -3,6 +3,7 @@ import { locationsApi } from '../api/locationsApi';
 import { useLocations } from '../hooks/useLocations';
 import type { LocationInput, SharedLocation } from '../models/location';
 import { LocationMap } from './LocationMap';
+import { PlaceSearch } from './PlaceSearch';
 import { ErrorNotice } from '../../../shared/ui';
 export function LocationForm({
   initial,
@@ -16,6 +17,8 @@ export function LocationForm({
   onCancel: () => void;
 }) {
   const [province, setProvince] = useState(initial?.provinceCode ?? '');
+  const [name, setName] = useState(initial?.name ?? '');
+  const [address, setAddress] = useState(initial?.addressDetail ?? '');
   const [ward, setWard] = useState(initial?.wardCode ?? '');
   const [lat, setLat] = useState(initial?.latitude.toString() ?? '');
   const [lon, setLon] = useState(initial?.longitude.toString() ?? '');
@@ -75,7 +78,13 @@ export function LocationForm({
         <div className="locations-form-fields">
           <label>
             Tên địa điểm
-            <input required name="name" maxLength={200} defaultValue={initial?.name} />
+            <input
+              required
+              name="name"
+              maxLength={200}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </label>
           <label>
             Loại
@@ -91,6 +100,7 @@ export function LocationForm({
             Tỉnh/thành
             <select
               required
+              name="provinceCode"
               disabled={provinces.loading || !!provinces.error}
               value={province}
               onChange={(e) => {
@@ -112,6 +122,7 @@ export function LocationForm({
             Xã/phường
             <select
               required
+              name="wardCode"
               value={ward}
               onChange={(e) => setWard(e.target.value)}
               disabled={!province || wards.loading || !!wards.error}
@@ -130,7 +141,8 @@ export function LocationForm({
               required
               name="addressDetail"
               maxLength={500}
-              defaultValue={initial?.addressDetail}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </label>
           <label>
@@ -154,6 +166,16 @@ export function LocationForm({
         <div className="locations-form-map">
           <h3>Vị trí trên bản đồ</h3>
           <p>Chọn ghim đúng cổng hoặc điểm phục vụ, sau đó xác nhận địa chỉ.</p>
+          <PlaceSearch
+            onSelect={(place) => {
+              setName(place.name);
+              setAddress(place.displayName);
+              setLat(place.latitude.toFixed(7));
+              setLon(place.longitude.toFixed(7));
+              setMethod('MapPin');
+              setConfirmed(false);
+            }}
+          />
           <LocationMap
             latitude={latitude}
             longitude={longitude}

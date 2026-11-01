@@ -6,9 +6,14 @@ import type {
   LocationRequest,
   SharedLocation,
   LocationVersion,
+  PlaceSearchResult,
 } from '../models/location';
 const root = '/locations';
 export const locationsApi = {
+  searchPlaces: (query: string, signal: AbortSignal) =>
+    request<PlaceSearchResult[]>(root + '/place-search?query=' + encodeURIComponent(query), {
+      signal,
+    }),
   provinces: (signal: AbortSignal) =>
     request<AdministrativeUnit[]>(root + '/provinces', { signal }),
   wards: (provinceCode: string, signal: AbortSignal) =>

@@ -1,26 +1,77 @@
 /* Horizontal workspace approved in FE-EXPERIENCE-03. */
 :root {
-  --surface-canvas: #f7f7f3;
-  --surface-subtle: #fafaf7;
+  --surface-canvas: #f6f7f8;
+  --surface-subtle: #fafafb;
   --text-primary: #242824;
   --text-secondary: #626963;
-  --line: #e3e6de;
+  --line: #e3e5e8;
   --sidebar-width: 0px;
+  --workspace-gutter: clamp(24px, 2.8vw, 40px);
+  --workspace-inset: 24px;
 }
 .horizontal-workspace {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  scrollbar-color: #a5abb4 var(--surface-subtle);
+  text-underline-offset: 0.2em;
+}
+/* One frame: at 1440px, 40 + 1360 + 40; at 390px, 18 + 354 + 18.
+   Detail columns divide the same inner width, with one 24px gutter. */
+.horizontal-workspace .brand small {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.horizontal-workspace .sidebar-bottom small {
+  font-size: 12px;
+}
+.horizontal-workspace .workspace-switch small,
+.horizontal-workspace .workspace-label,
+.horizontal-workspace .sidebar-note p,
+.horizontal-workspace .breadcrumbs {
+  font-size: 13px;
+}
+.horizontal-workspace .experience-user small {
+  color: #fff0ef;
+}
+.horizontal-workspace .entity-cell > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.horizontal-workspace .text-link {
+  min-height: 44px;
+}
+.horizontal-workspace .page-number {
+  min-width: 44px;
+  height: 44px;
+}
+.horizontal-workspace .locations-panel {
+  padding: 0;
+  overflow: hidden;
+  box-shadow: none; /* taste-skill-ignore: explicitly removes the legacy resting shadow. */
+}
+.horizontal-workspace .locations-panel > h3 {
+  padding-inline: var(--workspace-inset);
+}
+.horizontal-workspace .locations-panel > .locations-card {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+}
+.horizontal-workspace .locations-pagination {
+  margin: 0;
+  padding: 16px var(--workspace-inset);
 }
 .experience-header {
-  min-height: 92px;
+  min-height: 76px;
   background: var(--brand-primary);
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 24px max(40px, calc((100vw - 1440px) / 2));
+  padding: 16px max(var(--workspace-gutter), calc((100% - 1360px) / 2));
 }
 .experience-brand {
   display: flex;
@@ -28,7 +79,7 @@
   gap: 28px;
 }
 .experience-brand > span {
-  font-size: 12px;
+  font-size: 13px;
   color: #fff0ef;
   padding-left: 28px;
   border-left: 1px solid #ffffff55;
@@ -37,9 +88,9 @@
   font-size: 28px;
 }
 .experience-header .brand small {
-  font-size: 8px;
+  font-size: 11px;
   color: #fff0ef;
-  letter-spacing: 0.19em;
+  letter-spacing: 0.04em;
 }
 .experience-header .brand-symbol {
   background: white;
@@ -65,12 +116,12 @@
 }
 .experience-user strong {
   display: block;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
 }
 .experience-user small {
   display: block;
-  font-size: 10px;
+  font-size: 12px;
   color: #ffe3e0;
   margin-top: 3px;
 }
@@ -80,7 +131,7 @@
   border: 1px solid #ffffff66;
   border-radius: 7px;
   color: white;
-  font-size: 11px;
+  font-size: 13px;
 }
 .experience-header .logout-button:hover {
   background: #a61117;
@@ -92,7 +143,7 @@
 .horizontal-workspace .app-main {
   width: 100%;
   margin-left: 0;
-  min-height: calc(100dvh - 164px);
+  min-height: calc(100dvh - 140px);
   flex: 1;
 }
 .horizontal-workspace .topbar {
@@ -101,7 +152,7 @@
   height: 52px;
   min-height: 52px;
   margin: auto;
-  padding: 16px 40px 0;
+  padding: 12px var(--workspace-gutter) 0;
   background: transparent;
   border: 0;
 }
@@ -109,7 +160,7 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 10px;
+  font-size: 13px;
   color: var(--muted);
 }
 .topbar-context svg {
@@ -118,23 +169,24 @@
 }
 .horizontal-workspace .content {
   max-width: 1440px;
-  padding: 25px 40px 52px;
+  padding: 20px var(--workspace-gutter) 40px;
 }
 .horizontal-workspace .page-heading {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 .horizontal-workspace .page-heading h1,
 .horizontal-workspace .locations-heading h1 {
-  font-size: 38px;
-  letter-spacing: -0.04em;
+  font-size: 28px;
+  letter-spacing: -0.025em;
   font-weight: 600;
-  line-height: 1.18;
-  margin-bottom: 12px;
+  line-height: 1.3;
+  margin-bottom: 8px;
 }
 .horizontal-workspace .page-heading p,
 .horizontal-workspace .locations-heading p {
   font-size: 14px;
-  line-height: 1.7;
+  line-height: 1.6;
+  max-width: 72ch;
 }
 .horizontal-workspace .page-heading .button {
   min-height: 46px;
@@ -144,69 +196,79 @@
 }
 .horizontal-workspace .panel,
 .horizontal-workspace .locations-panel {
-  border-color: #e1e5dc;
+  border-color: var(--line);
   border-radius: 14px;
   background: white;
 }
 .horizontal-workspace .panel-toolbar {
-  padding: 26px 28px 0;
+  position: relative;
+  padding: 20px var(--workspace-inset) 0;
+}
+.horizontal-workspace .panel-toolbar > div {
+  width: 100%;
+  min-width: 0;
 }
 .horizontal-workspace .panel-toolbar h2 {
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.025em;
+  padding-right: 90px;
 }
 .horizontal-workspace .panel-toolbar p {
-  font-size: 12px;
-  margin-top: 7px;
+  font-size: 13px;
+  margin-top: 4px;
 }
 .horizontal-workspace .count {
+  position: absolute;
+  top: 20px;
+  right: var(--workspace-inset);
   padding: 6px 11px;
   border-radius: 6px;
-  background: #f4f6ef;
-  border-color: #e3e8d9;
-  color: #5d6851;
-  font-size: 11px;
+  background: var(--surface-subtle);
+  border-color: var(--line);
+  color: var(--text-secondary);
+  font-size: 13px;
 }
 .horizontal-workspace .filters {
-  padding: 24px 28px;
-  gap: 18px;
+  padding: 20px var(--workspace-inset);
+  gap: 16px;
 }
 .horizontal-workspace .filters .search-label {
   max-width: 560px;
 }
 .horizontal-workspace .filter-caption {
-  font-size: 12px;
-  margin-bottom: 9px;
+  font-size: 13px;
+  margin-bottom: 6px;
 }
 .horizontal-workspace .filters input,
 .horizontal-workspace .filters select {
   min-height: 46px;
-  background: #fdfefb;
+  background: white;
   font-size: 14px;
-  border-color: #d5dccd;
+  border-color: #cbd1d9;
 }
 .horizontal-workspace .search-control svg {
   top: 14px;
 }
 .horizontal-workspace th {
-  background: #f6f8f2;
-  color: #637057;
-  font-size: 11px;
-  padding: 15px 28px;
-  letter-spacing: 0.025em;
-  border-color: #e3e8da;
+  background: white;
+  color: var(--text-secondary);
+  font-size: 12px;
+  padding: 12px var(--workspace-inset);
+  letter-spacing: 0;
+  text-transform: none;
+  border-color: var(--line);
 }
 .horizontal-workspace td {
-  padding: 22px 28px;
-  font-size: 13px;
-  border-color: #eef1e9;
+  padding: 18px var(--workspace-inset);
+  font-size: 14px;
+  border-color: #eef0f2;
 }
 .horizontal-workspace td:first-child {
   font-size: 14px;
 }
 .horizontal-workspace td small {
-  font-size: 12px;
+  font-size: 13px;
 }
 .horizontal-workspace .organization-name {
   font-size: 14px;
@@ -215,9 +277,9 @@
 .horizontal-workspace .entity-initial {
   width: 42px;
   height: 42px;
-  background: #f3f5ee;
-  border-color: #e4e8dc;
-  color: #657154;
+  background: var(--surface-subtle);
+  border-color: var(--line);
+  color: var(--text-secondary);
   border-radius: 9px;
   font-size: 15px;
 }
@@ -226,21 +288,21 @@
 }
 .horizontal-workspace .status {
   padding: 5px 10px;
-  font-size: 11px;
+  font-size: 13px;
 }
 .horizontal-workspace .table-footer {
-  padding: 19px 28px;
+  padding: 16px var(--workspace-inset);
   font-size: 12px;
 }
 .horizontal-workspace .text-link {
   font-size: 13px;
 }
 .horizontal-workspace .pagination {
-  padding-block: 22px;
-  font-size: 12px;
+  padding-block: 16px;
+  font-size: 13px;
 }
 .horizontal-workspace .pagination .button {
-  min-height: 40px;
+  min-height: 44px;
 }
 .horizontal-workspace .info-strip {
   padding-top: 8px;
@@ -250,10 +312,10 @@
 }
 .horizontal-workspace .detail-grid {
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: 28px;
+  gap: 24px;
 }
 .horizontal-workspace .detail-panel {
-  padding: 28px;
+  padding: var(--workspace-inset);
 }
 .horizontal-workspace .detail-panel h2 {
   font-size: 21px;
@@ -268,58 +330,62 @@
   margin-bottom: 8px;
 }
 .horizontal-workspace .locations-tabs {
-  padding-inline: 28px;
-  gap: 36px;
+  padding-inline: var(--workspace-inset);
+  gap: 24px;
+  overflow-x: auto;
 }
 .horizontal-workspace .locations-tabs button {
-  font-size: 13px;
-  min-height: 62px;
+  font-size: 14px;
+  min-height: 52px;
+  flex-shrink: 0;
 }
 .horizontal-workspace .locations-search {
-  padding: 24px 28px;
+  padding: 20px var(--workspace-inset);
 }
 .horizontal-workspace .locations-search label {
-  font-size: 12px;
+  font-size: 13px;
 }
 .horizontal-workspace .locations-reason {
-  margin-inline: 28px;
-  background: #f6f8f1;
+  margin-inline: var(--workspace-inset);
+  background: var(--surface-subtle);
 }
 .horizontal-workspace .locations-panel > div > h3 {
-  padding-inline: 28px;
+  padding-inline: var(--workspace-inset);
 }
 .horizontal-workspace .locations-panel > .locations-card {
-  padding: 26px 28px;
+  padding: 20px var(--workspace-inset);
 }
 .horizontal-workspace .locations-card h4 {
   font-size: 16px;
 }
 .horizontal-workspace .locations-card p {
-  font-size: 12px;
+  font-size: 14px;
 }
 .horizontal-workspace .locations-card button {
-  font-size: 12px;
-  min-height: 40px;
+  font-size: 13px;
+  min-height: 44px;
 }
 .horizontal-workspace .app-footer {
-  padding: 22px max(40px, calc((100vw - 1360px) / 2));
-  background: #f1f3eb;
-  border-color: #dfe5d4;
-  color: #68745c;
+  padding: 20px max(var(--workspace-gutter), calc((100% - 1360px) / 2));
+  background: #f0f1f3;
+  border-color: var(--line);
+  color: var(--text-secondary);
+  font-size: 12px;
 }
 .horizontal-workspace .app-footer strong {
-  color: #39432f;
+  color: var(--text-primary);
+  font-size: 12px;
 }
 .horizontal-workspace .review-note-field {
-  margin-inline: 28px;
-  font-size: 12px;
+  margin-inline: var(--workspace-inset);
+  font-size: 13px;
 }
 .horizontal-workspace .record-actions .button {
-  min-height: 38px;
-  font-size: 12px;
+  min-height: 44px;
+  font-size: 13px;
 }
 .horizontal-workspace .record-actions .text-link {
-  font-size: 12px;
+  font-size: 13px;
 }
 .login-layout {
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
@@ -363,12 +429,12 @@
     position: relative;
     inset: auto;
     width: 100%;
-    height: 72px;
-    min-height: 72px;
+    height: 64px;
+    min-height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 40px;
+    padding: 0 var(--workspace-gutter);
     overflow: visible;
     background: white;
     border-bottom: 1px solid var(--line);
@@ -393,16 +459,16 @@
   .horizontal-workspace .sidebar .nav-item {
     min-height: 44px;
     padding: 12px 18px;
-    color: #59634f;
-    font-size: 13px;
+    color: var(--text-secondary);
+    font-size: 14px;
     font-weight: 600;
     gap: 9px;
     border-radius: 8px;
     background: transparent;
   }
   .horizontal-workspace .sidebar .nav-item:hover {
-    background: #f1f4e9;
-    color: #293423;
+    background: var(--surface-subtle);
+    color: var(--text-primary);
   }
   .horizontal-workspace .sidebar .nav-item[aria-current='page'] {
     background: var(--red);
@@ -438,10 +504,22 @@
     padding-inline: 28px;
   }
 }
+@media (min-width: 761px) and (max-width: 1000px) {
+  .horizontal-workspace .table-scroll th,
+  .horizontal-workspace .table-scroll td {
+    padding-inline: 16px;
+  }
+  .horizontal-workspace .table-scroll td:first-child {
+    min-width: 220px;
+  }
+  .horizontal-workspace .table-scroll .entity-initial {
+    display: none;
+  }
+}
 @media (max-width: 900px) {
   .experience-header {
-    min-height: 74px;
-    padding: 16px 22px;
+    min-height: 64px;
+    padding: 12px 22px;
     gap: 16px;
   }
   .experience-header .brand {
@@ -454,18 +532,18 @@
   }
   .experience-header .logout-button {
     margin-left: 0;
-    min-height: 40px;
+    min-height: 44px;
   }
   .horizontal-workspace .sidebar {
     padding-inline: 18px;
   }
   .horizontal-workspace .app-main {
-    min-height: calc(100dvh - 74px);
+    min-height: calc(100dvh - 64px);
   }
   .horizontal-workspace .topbar {
-    height: 56px;
-    min-height: 56px;
-    padding: 10px 22px 0;
+    height: 52px;
+    min-height: 52px;
+    padding: 8px 22px 0;
   }
   .topbar-context {
     display: none;
@@ -475,7 +553,7 @@
   }
   .horizontal-workspace .page-heading h1,
   .horizontal-workspace .locations-heading h1 {
-    font-size: 31px;
+    font-size: 26px;
   }
   .horizontal-workspace .detail-grid {
     grid-template-columns: 1fr;
@@ -483,59 +561,90 @@
   }
 }
 @media (max-width: 760px) {
+  :root {
+    --workspace-inset: 18px;
+  }
   .experience-header {
     padding-inline: 18px;
   }
   .horizontal-workspace .content {
-    padding: 20px 18px 36px;
+    padding: 16px 18px 32px;
   }
   .horizontal-workspace .topbar {
     padding-inline: 18px;
   }
   .horizontal-workspace .page-heading {
+    position: relative;
     flex-wrap: wrap;
     gap: 16px;
-    margin-bottom: 26px;
+    margin-bottom: 20px;
+  }
+  .horizontal-workspace .page-heading > div {
+    width: 100%;
+  }
+  .horizontal-workspace .page-heading:has(> .button) h1 {
+    padding-right: 110px;
+    min-height: 44px;
   }
   .horizontal-workspace .page-heading h1,
   .horizontal-workspace .locations-heading h1 {
-    font-size: 29px;
+    font-size: 24px;
   }
   .horizontal-workspace .page-heading p,
   .horizontal-workspace .locations-heading p {
-    font-size: 13px;
+    font-size: 14px;
   }
   .horizontal-workspace .page-heading .button {
-    min-height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    min-height: 44px;
     padding: 9px 14px;
-    font-size: 12px;
+    font-size: 13px;
   }
   .horizontal-workspace .panel-toolbar {
-    padding: 22px 18px 0;
+    padding: 16px 18px 0;
   }
   .horizontal-workspace .panel-toolbar h2 {
     font-size: 17px;
   }
+  .horizontal-workspace .panel-toolbar .count {
+    top: 16px;
+  }
   .horizontal-workspace .filters {
-    padding: 22px 18px;
+    padding: 16px 18px;
+    gap: 12px;
+  }
+  .horizontal-workspace .filters input,
+  .horizontal-workspace .filters select {
+    min-height: 44px;
+  }
+  .horizontal-workspace .entity-cell {
+    gap: 10px;
+  }
+  .horizontal-workspace .table-scroll td[colspan] {
+    grid-column: 1 / -1;
+  }
+  .horizontal-workspace .locations-tabs {
+    margin-bottom: 0;
   }
   .horizontal-workspace .table-scroll td {
     padding: 0;
-    font-size: 13px;
+    font-size: 14px;
   }
   .horizontal-workspace .table-scroll td:first-child {
     font-size: 14px;
   }
   .horizontal-workspace .table-scroll tr {
-    padding: 22px 18px;
-    gap: 13px 10px;
+    padding: 18px;
+    gap: 8px 10px;
   }
   .horizontal-workspace .table-footer {
     padding: 18px;
-    font-size: 11px;
+    font-size: 12px;
   }
   .horizontal-workspace .pagination {
-    font-size: 11px;
+    font-size: 12px;
   }
   .horizontal-workspace .review-note-field {
     margin-inline: 18px;
@@ -551,7 +660,7 @@
     gap: 20px;
   }
   .horizontal-workspace .locations-tabs button {
-    font-size: 12px;
+    font-size: 14px;
   }
   .horizontal-workspace .locations-reason {
     margin-inline: 18px;

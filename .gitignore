@@ -9,5 +9,6 @@ dist/
 .npm-cache/
 *.log
 .ui-artifacts/
+.taste-skill/
 .impeccable/review/
 .impeccable/questions/

@@ -5,25 +5,25 @@ colors:
   primary: "#d3171e"
   primary-hover: "#ad1117"
   gold: "#ffc72c"
-  canvas: "#f7f7f3"
+  canvas: "#f6f7f8"
   panel: "#fff"
-  subtle: "#fafaf7"
+  subtle: "#fafafb"
   text-primary: "#242824"
   text-secondary: "#626963"
-  line: "#e3e6de"
+  line: "#e3e5e8"
   rail: "#181c22"
   rail-text: "#bdc4ce"
   rail-hover: "#292f38"
   focus: "#a30f16"
-  panel-line: "#e1e5dc"
-  filter-bg: "#fdfefb"
-  filter-line: "#d5dccd"
-  table-heading-bg: "#f6f8f2"
-  table-heading-text: "#637057"
-  navigation-text: "#59634f"
-  navigation-hover: "#f1f4e9"
-  identity-bg: "#f3f5ee"
-  identity-text: "#657154"
+  panel-line: "#e3e5e8"
+  filter-bg: "#fff"
+  filter-line: "#cbd1d9"
+  table-heading-bg: "#fff"
+  table-heading-text: "#626963"
+  navigation-text: "#626963"
+  navigation-hover: "#fafafb"
+  identity-bg: "#fafafb"
+  identity-text: "#626963"
   input-line: "#cbd1d9"
   secondary-text: "#333d4a"
   secondary-line: "#dce0e6"
@@ -40,13 +40,13 @@ colors:
   danger-outline-text: "#b21218"
   danger-outline-line: "#efb8bb"
   danger-outline-hover: "#fff3f3"
-  auth-canvas: "#f7f5f0"
-  auth-line: "#e1ddd5"
-  auth-divider: "#d9d4ca"
+  auth-canvas: "#f6f7f8"
+  auth-line: "#e3e5e8"
+  auth-divider: "#e3e5e8"
   auth-muted: "#625e58"
   auth-portal-text: "#4b4741"
-  auth-portal-hover: "#efece5"
-  auth-portal-current: "#f1e7df"
+  auth-portal-hover: "#eceef1"
+  auth-portal-current: "#fbecee"
 typography:
   display:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
@@ -56,10 +56,10 @@ typography:
     letterSpacing: "-0.035em"
   headline:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
-    fontSize: "38px"
+    fontSize: "28px"
     fontWeight: 600
-    lineHeight: 1.18
-    letterSpacing: "-0.04em"
+    lineHeight: 1.3
+    letterSpacing: "-0.025em"
   title:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
     fontSize: "18px"
@@ -80,24 +80,24 @@ typography:
     fontWeight: 600
   table-body:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
-    fontSize: "13px"
+    fontSize: "14px"
     fontWeight: 400
   status:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
-    fontSize: "11px"
+    fontSize: "13px"
     fontWeight: 600
   headline-tablet:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
-    fontSize: "31px"
+    fontSize: "26px"
     fontWeight: 600
-    lineHeight: 1.18
-    letterSpacing: "-0.04em"
+    lineHeight: 1.3
+    letterSpacing: "-0.025em"
   headline-mobile:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
-    fontSize: "29px"
+    fontSize: "24px"
     fontWeight: 600
-    lineHeight: 1.18
-    letterSpacing: "-0.04em"
+    lineHeight: 1.3
+    letterSpacing: "-0.025em"
   detail-title:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
     fontSize: "21px"
@@ -115,13 +115,13 @@ typography:
     lineHeight: 1.5
   metadata:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
-    fontSize: "12px"
+    fontSize: "13px"
     fontWeight: 400
   table-label:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
-    fontSize: "11px"
+    fontSize: "12px"
     fontWeight: 600
-    letterSpacing: "0.025em"
+    letterSpacing: "0em"
   brand:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
     fontSize: "28px"
@@ -134,12 +134,12 @@ typography:
     letterSpacing: "-0.045em"
   brand-caption:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
-    fontSize: "8px"
+    fontSize: "11px"
     fontWeight: 600
-    letterSpacing: "0.19em"
+    letterSpacing: "0.04em"
   supporting-small:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
-    fontSize: "10px"
+    fontSize: "12px"
     fontWeight: 400
   identity-letter:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
@@ -155,10 +155,10 @@ typography:
     fontWeight: 400
   auth-intro:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
-    fontSize: "clamp(30px, 3.2vw, 46px)"
+    fontSize: "clamp(28px, 2.5vw, 36px)"
     fontWeight: 600
     lineHeight: 1.22
-    letterSpacing: "-0.035em"
+    letterSpacing: "-0.025em"
   auth-title:
     fontFamily: "Inter, 'Segoe UI', sans-serif"
     fontSize: "26px"
@@ -278,14 +278,14 @@ components:
 
 **Creative North Star: "Swiss transport wayfinding"**
 
-Clear destinations, aligned records and restrained surfaces define this Management application. A full-width crimson brand header and white horizontal destination row introduce a warm, light workspace. Generous task headings and roomy records make identity, status and next actions easy to scan; gold provides brand punctuation.
+Clear destinations, aligned records and restrained surfaces define this Management application. A full-width crimson brand header and white horizontal destination row introduce a neutral, light workspace. Compact task headings and readable records make identity, status and next actions easy to scan; gold provides brand punctuation.
 
 This is the implemented Management system. It complements the shared [VieGo cross-platform design guidance](../../TransConnect-Docs/06-ui/VIEGO_DESIGN_SYSTEM.md), which retains brand and business authority. The user-selected horizontal composition supersedes the earlier desktop rail while preserving the established list-to-detail workflow.
 
 **Key Characteristics:**
 
 - Crimson brand header and white horizontal destinations on desktop.
-- Warm white work surfaces, spacious records and a clear task hierarchy.
+- Neutral work surfaces, readable records and a clear task hierarchy.
 - Flat bordered panels, restrained corners and labeled semantic statuses.
 - Local Vietnamese Inter typography and inline SVG control icons.
 - Charcoal navigation retained only as the mobile drawer.
@@ -296,7 +296,7 @@ The auth extension follows the user's choice “Hai trang đăng nhập riêng�
 
 ## Colors
 
-The normative frontmatter pairs transport crimson and wayfinding gold with warm, low-chroma work surfaces.
+The normative frontmatter pairs transport crimson and wayfinding gold with neutral, low-chroma work surfaces.
 
 ### Primary
 
@@ -315,7 +315,7 @@ The normative frontmatter pairs transport crimson and wayfinding gold with warm,
 - **Navigation text and hover** belong to the desktop white destination row.
 - **Rail, rail text and rail hover** belong to the charcoal mobile drawer.
 - **Identity background and text** distinguish reusable record initials.
-- **Auth cream canvas, warm lines and muted text** belong to the public entry pages. Portal rows use a pale warm hover and selected fill with deeper crimson text; these auth roles do not replace the Management shell palette.
+- **Auth neutral canvas, quiet lines and muted text** belong to the public entry pages. Portal rows use a neutral hover and selected fill with deeper crimson text; these auth roles do not replace the Management shell palette.
 
 Pending amber, approved green and rejected red remain semantic status families, each with a label, dot, fill and border.
 
@@ -335,28 +335,28 @@ Local Latin and Vietnamese files supply regular, semibold and bold weights under
 - **Display:** Retained legacy display role; current login context uses the dedicated auth-intro role. Auth context is semibold, fluid on desktop, 32px at 900px and 28px at 700px; it remains visible on mobile.
 - **Headline:** Semibold Management task headings; headline-tablet applies at 900px and headline-mobile at 760px. These large headings anchor the work area.
 - **Title:** Panel toolbar titles; mobile toolbar titles use panel-title-mobile. Detail panels use detail-title. Auth form headings use auth-title, reducing to 24px at 700px.
-- **Auth field and label:** Readable native inputs/selects use auth-field with semibold auth-label labels. Supporting form descriptions use 13px type and a 1.75 line height; portal descriptions and footer copy use 12px.
-- **Body:** General content, descriptions and fields; mobile supporting page descriptions reduce to 13px.
+- **Auth field and label:** Readable native inputs/selects use auth-field with semibold auth-label labels. Form descriptions use 14px type and a 1.75 line height; portal descriptions, supporting notes and footer copy use 13px.
+- **Body:** General content, descriptions and fields; mobile Management page descriptions remain 14px.
 - **Record identity and table body:** Semibold identity sits above regular secondary record data. Metadata describes registration codes and supporting information.
-- **Label and table label:** Visible field labels and uppercase, lightly tracked table headings.
-- **Control and status:** Semibold action and destination labels; small labeled semantic chips. Inline actions use 12px where space is constrained.
-- **Brand and brand caption:** The wordmark and small uppercase MANAGEMENT caption are identity treatments, not task text. The header wordmark uses brand-mobile below 900px. Login and drawer retain their existing 27px wordmark and 9px caption.
+- **Label and table label:** Visible field labels and sentence-case, untracked table headings.
+- **Control and status:** Semibold action and destination labels; small labeled semantic chips. Inline actions use 13px text and at least 44px hit areas.
+- **Brand and brand caption:** The wordmark and small uppercase MANAGEMENT caption are identity treatments, not task text. The header wordmark uses brand-mobile below 900px. Login and drawer retain their existing 27px wordmark; captions use 11px.
 
 Tables use tabular numerals. Inputs, selects and textareas use 16px at 760px and below, including filter fields. The supporting-small role is limited to account-role, footer and quiet context copy. Identity-letter and location-title describe record initials and local record headings; input-mobile preserves mobile text entry. Small status, account-role and brand-caption sizes are limited to these supporting roles; they do not replace readable task titles or form controls.
 
 ## Layout
 
-Desktop uses a full-width crimson brand/account header (minimum 92px) followed by a white horizontal destination row (72px). The main region spans the viewport. Breadcrumb context sits in a transparent band (52px). Content is centered within a maximum width (1440px), using horizontal gutters from the page spacing token and bottom padding (52px). Main headings leave a clear gap (32px) before work panels.
+Desktop uses a full-width crimson brand/account header (minimum 76px) followed by a white horizontal destination row (64px). The main region spans the viewport. Breadcrumb context sits in a transparent band (52px). Content is centered within a maximum width (1440px), using horizontal gutters from the page spacing token and bottom padding (40px). Main headings leave a clear gap (24px) before work panels.
 
-List panels combine toolbar, wrapping filters, aligned records and footer. Desktop toolbar and filter horizontal padding is 28px; filters use 24px vertical padding and 18px gaps. Record cells use 22px vertical and 28px horizontal padding, with larger identity badges. These are spacious working records rather than compact dashboard tiles.
+List panels combine toolbar, wrapping filters, aligned records and footer. Desktop toolbar and filter horizontal padding is 24px; filters use 20px vertical padding and 16px gaps. Record cells use 18px vertical and 24px horizontal padding. Counts align with the toolbar heading without narrowing its description. At 761–1000px, cell padding reduces to 16px and redundant initial badges hide so names keep more space.
 
-At 1100px and below, shell gutters reduce to 28px. At 900px and below, the header reduces to a minimum 74px, secondary account details hide, and horizontal destinations become a charcoal off-canvas drawer with a scrim and close control. The drawer width is the lesser of 300px and viewport width minus 48px. Breadcrumb/menu context uses a 56px band, content gutters reduce to 22px, and detail columns stack.
+At 1100px and below, shell gutters reduce to 28px. At 900px and below, the header reduces to a minimum 64px, secondary account details hide, and horizontal destinations become a charcoal off-canvas drawer with a scrim and close control. The drawer width is the lesser of 300px and viewport width minus 48px. Breadcrumb/menu context uses a 52px band, content gutters reduce to 22px, and detail columns stack.
 
-At 760px and below, content gutters use mobile-gutter, headings wrap, and filters fill the available width. Tables become stacked two-column record groups with identity and actions spanning the group; the semantic table header remains available to assistive technology. Record groups use 22px vertical and 18px horizontal padding. Wider history tables retain a scroll container. Preserve long-name and long-email wrapping.
+At 760px and below, content gutters use mobile-gutter, headings wrap, and filters fill the available width. Tables become stacked two-column record groups with identity and actions spanning the group; the semantic table header remains available to assistive technology. Record groups use 18px padding. The refresh control aligns beside the task title and leaves its description the full width. Wider history tables retain a scroll container. Preserve long-name and long-email wrapping.
 
-Detail information and review panels align at the top in a proportional grid (1.1fr / 1fr) with 28px gaps and panel padding. Secondary history follows across the full width. Location forms place fields beside a map region and stack at 1000px; their local heading layout also adapts at 600px.
+Detail information and review panels align at the top in a proportional grid (1.1fr / 1fr) with 24px gaps and panel padding. Secondary history follows across the full width. Location forms place fields beside a map region and stack at 1000px; their local heading layout also adapts at 600px.
 
-Auth pages pair cream context and portal navigation with a white bordered form in a proportional grid (1fr / 0.92fr), within a 1120px maximum content width at 90% of the viewport. A thin crimson top rule and shared VieGo brand maintain continuity. The context/form gap is fluid (40px to 104px); content has 56px vertical padding. At 900px the content width is 92%, gap is 32px and form padding is 28px. At 700px context and form stack with 20px side gutters, 28px gaps and 24px form padding; portal links become two adjacent compact segments. Header context, the secondary footer line and partner note hide, while the context heading remains. Session restoration copy remains concise supporting text; storage and transport behavior are not visual tokens.
+Auth pages pair neutral context and portal navigation with a white bordered form in a proportional grid (1fr / 0.92fr), within a 1120px maximum content width at 90% of the viewport. A thin crimson top rule and shared VieGo brand maintain continuity. The context/form gap is fluid (40px to 104px); content has 56px vertical padding. At 900px context and form stack in a centered column up to 600px, with 32px vertical padding/gap and 28px form padding. Portal links become adjacent compact segments and the secondary partner note hides. At 700px side gutters are 20px, the gap is 28px and form padding is 24px. Header context, the secondary footer line and partner note hide, while the context heading remains. Session restoration copy remains concise supporting text; storage and transport behavior are not visual tokens.
 
 ## Elevation & Depth
 
@@ -374,25 +374,25 @@ Auth forms use the dedicated auth-form radius. Desktop portal choices are flat d
 
 ### Buttons
 
-Solid crimson primary and danger actions use white labels and a deeper hover. White secondary controls use a neutral border and pale hover; the page-heading refresh variant has a transparent resting fill and warmer border. Rejection can use the outlined danger variant. Standard controls have a minimum height (44px), filter and desktop heading controls 46px, inline record actions 38px, and pagination 40px. Disabled controls reduce opacity (0.48) and show an unavailable cursor.
+Solid crimson primary and danger actions use white labels and a deeper hover. White secondary controls use a neutral border and pale hover; the page-heading refresh variant has a transparent resting fill and warmer border. Rejection can use the outlined danger variant. Standard controls have a minimum height (44px), filter and desktop heading controls 46px, inline record actions and pagination 44px. Disabled controls reduce opacity (0.48) and show an unavailable cursor.
 
 Color changes use short transitions (0.16s, ease). Preserve reduced-motion behavior and visible keyboard focus.
 
 ### Chips
 
-Status chips pair a text label and small dot with semantic fill, stroke and text color. In the horizontal workspace they use the status role and 5px / 10px padding. Counts use a warm neutral fill, border and 11px type. Status is never conveyed through color alone.
+Status chips pair a text label and small dot with semantic fill, stroke and text color. In the horizontal workspace they use the status role and 5px / 10px padding. Counts use a neutral fill, border and 13px type. Status is never conveyed through color alone.
 
 ### Cards / Containers
 
-Panels are white, flat and lightly bordered. Toolbars, roomy filters and fine record separators supply structure. Detail panels use 28px padding, reducing to 22px on mobile. Expanded content uses the subtle surface. Loading, empty, error and success states remain visually distinct.
+Panels are white, flat and lightly bordered. Toolbars, roomy filters and fine record separators supply structure. Detail panels use 24px padding, reducing to 22px on mobile. Expanded content uses the subtle surface. Loading, empty, error and success states remain visually distinct.
 
 ### Inputs / Fields
 
-Fields have visible labels, a fine stroke and the control radius. General fields remain white with the input-line stroke; horizontal list filters use the warmer filter background and stroke with a 46px minimum height. Hover darkens the border; focus turns it crimson. The shared outline is 3px with a 3px offset. Header and drawer focus use gold; the desktop white destination row uses deeper crimson. Auth fields and submit controls use a 50px minimum height; auth inputs/selects use 16px type at 700px and below, with the inherited mobile input rule also applying through 760px. Preserve invalid-state messages and disabled behavior.
+Fields have visible labels, a fine stroke and the control radius. General fields remain white with the input-line stroke; horizontal list filters use white backgrounds and neutral strokes with a 46px minimum height (44px on phones). Hover darkens the border; focus turns it crimson. The shared outline is 3px with a 3px offset. Header and drawer focus use gold; the desktop white destination row uses deeper crimson. Auth fields and submit controls use a 50px minimum height; auth inputs/selects use 16px type at 700px and below, with the inherited mobile input rule also applying through 760px. Preserve invalid-state messages and disabled behavior.
 
 ### Auth entry
 
-`/login/admin` presents a styled native account select labeled **Tài khoản**, with **Sysadmin** selected by default and a password field. The selector displays names only; Sysadmin maps internally to admin@hotmail.com. Developer, Data engineer and Accountant are selectable but unconfigured: an inline status explains why password entry and submission are disabled. Changing accounts clears the password and obsolete errors. The selector uses a subtle surface, semibold name, crimson person icon and neutral chevron, while retaining native keyboard behavior. `/login/partner` presents a business email and password with Partner-only account creation. `/login` redirects to `/login/admin` for compatibility. Both pages use the same cream context/form composition, route-specific headings and icons, route-driven portal selection and current VieGo red/gold identity. Busy state prevents duplicate submission and portal changes; errors focus the summary and link to invalid fields. Password visibility remains an explicit labeled control. The auth layout is an extension of the current world, with no raster imagery or image comp.
+`/login/admin` presents a styled native account select labeled **Tài khoản**, with **Sysadmin** selected by default and a password field. The selector displays names only; Sysadmin maps internally to admin@hotmail.com. Developer, Data engineer and Accountant are selectable but unconfigured: an inline status explains why password entry and submission are disabled. Changing accounts clears the password and obsolete errors. The selector uses a subtle surface, semibold name, crimson person icon and neutral chevron, while retaining native keyboard behavior. `/login/partner` presents a business email and password with Partner-only account creation. `/login` redirects to `/login/admin` for compatibility. Both pages use the same neutral context/form composition, route-specific headings and icons, route-driven portal selection and current VieGo red/gold identity. Busy state prevents duplicate submission and portal changes; errors focus the summary and link to invalid fields. Password visibility remains an explicit labeled control. The auth layout is an extension of the current world, with no raster imagery or image comp.
 
 ### Navigation
 
