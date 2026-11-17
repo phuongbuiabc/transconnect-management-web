@@ -18,6 +18,11 @@ const paths = {
   document: 'M14 2H5v20h14V7l-5-5ZM14 2v6h5M8 12h8M8 16h6',
   info: 'M12 11v6M12 7h.01M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z',
   check: 'm5 12 4 4L19 6',
+  home: 'M3 11 12 4l9 7M5 10v10h5v-6h4v6h5V10',
+  mail: 'M3 6h18v12H3zM3 7l9 6 9-6',
+  vehicle:
+    'M3 7h11v9H3zM14 10h4l3 3v3h-7M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM17 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z',
+  team: 'M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM21 21v-2a4 4 0 0 0-3-3.87',
 } as const;
 export type IconName = keyof typeof paths;
 export function Icon({ name, ...props }: SVGProps<SVGSVGElement> & { name: IconName }) {

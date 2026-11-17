@@ -11,10 +11,36 @@ export const organizationsApi = {
         (status && status !== 'all' ? '&status=' + status : ''),
       { signal },
     ),
-  submit: (name: string, registrationNumber: string, id?: string, ownerEmail?: string) =>
+  submit: (
+    name: string,
+    registrationNumber: string,
+    requestedServiceTypes: string[],
+    id?: string,
+    ownerEmail?: string,
+  ) =>
     request<Organization>(
       id ? `/organizations/${encodeURIComponent(id)}/resubmit` : '/organizations',
-      { method: 'POST', body: JSON.stringify({ name, registrationNumber, ownerEmail }) },
+      {
+        method: 'POST',
+        body: JSON.stringify({ name, registrationNumber, ownerEmail, requestedServiceTypes }),
+      },
+    ),
+  /** Wizard đăng ký đối tác: nộp/nộp lại kèm hồ sơ tùy chọn (Q-PARTNER-REG-D1 B). */
+  apply: (
+    body: {
+      name: string;
+      registrationNumber: string;
+      requestedServiceTypes: string[];
+      legalEntityType: string | null;
+      registeredAddress: string | null;
+      contactPhone: string | null;
+      contactEmail: string | null;
+    },
+    resubmitId?: string | null,
+  ) =>
+    request<Organization>(
+      resubmitId ? `/organizations/${encodeURIComponent(resubmitId)}/resubmit` : '/organizations',
+      { method: 'POST', body: JSON.stringify(body) },
     ),
   list: (signal?: AbortSignal) => request<Organization[]>('/organizations', { signal }),
   reinviteOwner: (id: string) =>

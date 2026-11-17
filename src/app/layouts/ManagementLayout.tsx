@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../features/auth/hooks/useAuth';
 import { Brand } from '../../shared/ui';
@@ -11,16 +11,63 @@ const destinations: { path: string; label: string; permission: string; icon: Ico
     icon: 'organizations',
   },
   { path: 'drivers', label: 'Tài xế', permission: 'organizations.manage', icon: 'drivers' },
+  { path: 'services', label: 'Dịch vụ', permission: 'services.review', icon: 'shield' },
   { path: 'locations', label: 'Địa điểm', permission: 'locations.manage', icon: 'locations' },
   { path: 'accounts', label: 'Tài khoản', permission: 'users.manage', icon: 'accounts' },
 ];
+export interface ShellDestination {
+  path: string;
+  label: string;
+  icon: IconName;
+  end?: boolean;
+}
 export function AdminLayout() {
   const auth = useAuth();
-  const { pathname } = useLocation();
-  const visibleDestinations = destinations.filter((item) =>
-    auth.user?.permissions.includes(item.permission),
+  return (
+    <WorkspaceShell
+      basePath="/admin"
+      rootLabel="Quản trị"
+      caption="Vận hành & quản trị"
+      roleLabel="Quản trị viên nội bộ"
+      workspaceTitle="Quản trị nền tảng"
+      workspaceSubtitle="Không gian nội bộ"
+      contextLabel="Không gian quản trị nội bộ"
+      navigationLabel="Điều hướng quản trị"
+      destinations={destinations
+        .filter((item) => auth.user?.permissions.includes(item.permission))
+        .map((item) => ({ path: '/admin/' + item.path, label: item.label, icon: item.icon }))}
+    />
   );
-  const current = destinations.find((item) => pathname.startsWith('/admin/' + item.path));
+}
+/** Presentation shell shared by Admin and Partner; destinations are decided by the caller. */
+export function WorkspaceShell({
+  basePath,
+  rootLabel,
+  caption,
+  roleLabel,
+  workspaceTitle,
+  workspaceSubtitle,
+  contextLabel,
+  navigationLabel,
+  destinations: visibleDestinations,
+  children,
+}: {
+  basePath: string;
+  rootLabel: string;
+  caption: string;
+  roleLabel: string;
+  workspaceTitle: string;
+  workspaceSubtitle: string;
+  contextLabel: string;
+  navigationLabel: string;
+  destinations: ShellDestination[];
+  children?: ReactNode;
+}) {
+  const auth = useAuth();
+  const { pathname } = useLocation();
+  const current =
+    visibleDestinations.find((item) => !item.end && pathname.startsWith(item.path)) ||
+    visibleDestinations.find((item) => pathname === item.path);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobile, setMobile] = useState(() => matchMedia('(max-width: 900px)').matches);
   const [busy, setBusy] = useState(false);
@@ -92,10 +139,10 @@ export function AdminLayout() {
       </a>
       <header className="experience-header" inert={mobile && menuOpen}>
         <div className="experience-brand">
-          <Link to="/admin" aria-label="VieGo, về không gian quản trị">
+          <Link to={basePath} aria-label={'VieGo, về ' + workspaceTitle.toLocaleLowerCase('vi')}>
             <Brand light />
           </Link>
-          <span>Vận hành &amp; quản trị</span>
+          <span>{caption}</span>
         </div>
         <div className="experience-account">
           <span className="experience-avatar" aria-hidden="true">
@@ -103,7 +150,7 @@ export function AdminLayout() {
           </span>
           <div className="experience-user">
             <strong>{auth.user?.fullName}</strong>
-            <small>Quản trị viên nội bộ</small>
+            <small>{roleLabel}</small>
           </div>
           <button
             type="button"
@@ -123,10 +170,10 @@ export function AdminLayout() {
         inert={mobile && !menuOpen}
         role={mobile && menuOpen ? 'dialog' : undefined}
         aria-modal={mobile && menuOpen ? true : undefined}
-        aria-label="Điều hướng quản trị"
+        aria-label={navigationLabel}
       >
         <div className="sidebar-brand-row">
-          <Link className="brand-link" to="/admin" onClick={closeNavigation}>
+          <Link className="brand-link" to={basePath} onClick={closeNavigation}>
             <Brand light />
           </Link>
           <button
@@ -143,8 +190,8 @@ export function AdminLayout() {
             <Icon name="shield" />
           </span>
           <div>
-            <strong>Quản trị nền tảng</strong>
-            <small>Không gian nội bộ</small>
+            <strong>{workspaceTitle}</strong>
+            <small>{workspaceSubtitle}</small>
           </div>
         </div>
         <p className="workspace-label">Quản lý</p>
@@ -152,7 +199,8 @@ export function AdminLayout() {
           {visibleDestinations.map((item) => (
             <NavLink
               key={item.path}
-              to={'/admin/' + item.path}
+              to={item.path}
+              end={item.end}
               className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}
               onClick={closeNavigation}
             >
@@ -176,7 +224,7 @@ export function AdminLayout() {
           </span>
           <div>
             <strong>{auth.user?.fullName}</strong>
-            <small>Quản trị viên nội bộ</small>
+            <small>{roleLabel}</small>
           </div>
         </div>
       </aside>
@@ -204,17 +252,17 @@ export function AdminLayout() {
               <Icon name="menu" />
             </button>
             <nav className="breadcrumbs" aria-label="Đường dẫn">
-              <Link to="/admin">Quản trị</Link>
+              <Link to={basePath}>{rootLabel}</Link>
               <Icon name="right" />
-              <span aria-current="page">{current?.label || 'Không gian quản trị'}</span>
+              <span aria-current="page">{current?.label || workspaceTitle}</span>
             </nav>
           </div>
           <span className="topbar-context">
-            <Icon name="shield" /> Không gian quản trị nội bộ
+            <Icon name="shield" /> {contextLabel}
           </span>
         </header>
         <main id="main-content" className="content" tabIndex={-1}>
-          <Outlet />
+          {children ?? <Outlet />}
         </main>
         <footer className="app-footer">
           <strong>VieGo Management</strong>

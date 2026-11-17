@@ -64,6 +64,11 @@ export const foundationApi = {
       method: 'POST',
       body: JSON.stringify({ token }),
     }),
+  /** Signed-in acceptance of a received membership invitation; BE matches the verified account email. */
+  acceptMembership: (invitationId: string) =>
+    request('/organizations/invitations/' + encodeURIComponent(invitationId) + '/accept', {
+      method: 'POST',
+    }),
   revoke: (id: string, invitationId: string) =>
     request(org(id) + '/invitations/' + encodeURIComponent(invitationId), { method: 'DELETE' }),
   updateMember: (id: string, member: Member, role: string, isActive: boolean) =>

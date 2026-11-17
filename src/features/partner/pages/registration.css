@@ -1,0 +1,225 @@
+/* PARTNER-REG-01: wizard đăng ký đối tác. Giữ ngôn ngữ trang đăng nhập (viền đỏ, nền xám nhạt). */
+.reg-page {
+  min-height: 100svh;
+  background: #f6f7f8;
+  border-top: 6px solid var(--red);
+  color: #242733;
+}
+.reg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 5vw;
+  border-bottom: 1px solid #e3e5e8;
+  background: #fff;
+}
+.reg-header .text-link {
+  min-height: 44px;
+  font-size: 14px;
+}
+.reg-body {
+  width: min(760px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 40px 0 64px;
+  display: grid;
+  gap: 24px;
+}
+.reg-eyebrow {
+  margin: 0 0 6px;
+  color: var(--red-dark);
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+.reg-intro h1 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 30px);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.reg-card {
+  display: grid;
+  gap: 18px;
+  padding: clamp(20px, 4vw, 32px);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.reg-card h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 650;
+}
+.reg-lead {
+  margin: -8px 0 0;
+  color: var(--muted);
+  max-width: 62ch;
+}
+.reg-field {
+  display: grid;
+  gap: 6px;
+}
+.reg-field > label,
+label.reg-field {
+  margin: 0;
+}
+.reg-field small {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 400;
+}
+.reg-field-error {
+  margin: 0;
+  color: var(--red-dark);
+  font-size: 13px;
+  font-weight: 500;
+}
+.reg-field input[aria-invalid='true'],
+.reg-field select[aria-invalid='true'] {
+  border-color: var(--red);
+}
+.reg-otp {
+  max-width: 220px;
+  font-size: 20px;
+  letter-spacing: 0.3em;
+  font-variant-numeric: tabular-nums;
+}
+.reg-status:empty {
+  display: none;
+}
+.reg-status {
+  margin: 0;
+  color: #247347;
+}
+.reg-optional {
+  display: grid;
+  gap: 16px;
+  margin: 4px 0 0;
+  padding: 18px 20px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fafbfc;
+}
+.reg-optional legend {
+  padding: 0 6px;
+  font-size: 14px;
+  font-weight: 650;
+}
+.reg-optional legend span {
+  margin-left: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+}
+.reg-optional > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+.reg-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.reg-rejected {
+  border: 1px solid #f1c4c6;
+  background: #fff6f6;
+}
+.reg-rejected p {
+  margin: 4px 0 0;
+}
+.reg-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+.reg-switch {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.reg-switch a {
+  color: #b51118;
+  font-weight: 650;
+}
+.reg-summary {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+.reg-summary-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.reg-summary-head h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+}
+.reg-summary-head .text-link {
+  min-height: 44px;
+}
+.reg-summary dl {
+  display: grid;
+  grid-template-columns: minmax(120px, 34%) minmax(0, 1fr);
+  gap: 8px 16px;
+  margin: 0;
+}
+.reg-summary dt {
+  color: var(--muted);
+  font-size: 14px;
+}
+.reg-summary dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.reg-summary ul {
+  margin: 0;
+  padding-left: 20px;
+}
+.reg-empty {
+  color: #8a909c;
+  font-style: italic;
+}
+.reg-owner-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.reg-done-record {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.reg-next {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 8px;
+}
+@media (max-width: 640px) {
+  .reg-body {
+    padding-top: 24px;
+  }
+  .reg-grid,
+  .reg-summary dl {
+    grid-template-columns: 1fr;
+  }
+  .reg-summary dd {
+    margin-bottom: 6px;
+  }
+  .reg-actions .button {
+    width: 100%;
+  }
+}

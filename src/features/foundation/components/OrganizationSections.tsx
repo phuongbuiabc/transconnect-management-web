@@ -3,47 +3,10 @@ import { foundationApi } from '../api/foundationApi';
 import { useFoundation } from '../hooks/useFoundation';
 import { ProfileDocuments } from './ProfileDocuments';
 import { EngagementContact } from './EngagementContact';
-import type { Membership, Vehicle } from '../models/foundation';
+import type { Vehicle } from '../models/foundation';
 import { ErrorNotice, Loading } from '../../../shared/ui';
 import type { Organization } from '../../organizations/models/organization';
-import { LocationsPage } from '../../locations/pages/LocationsPage';
-export function OrganizationWorkspace({ membership }: { membership: Membership }) {
-  const [tab, setTab] = useState('drivers');
-  const owner = membership.role === 'OrganizationOwner';
-  return (
-    <section className="panel">
-      <h2>
-        {membership.organizationName} · {membership.role}
-      </h2>
-      <p>
-        Nhân viên và lời mời còn hiệu lực: {membership.employeeOccupancy}/{membership.employeeLimit}{' '}
-        · Tài xế và lời mời: {membership.driverOccupancy}/
-        {membership.driverLimit ?? 'Không giới hạn'}
-      </p>
-      <nav aria-label="Quản lý tổ chức">
-        <button onClick={() => setTab('drivers')}>Tài xế</button>
-        <button onClick={() => setTab('vehicles')}>Phương tiện</button>
-        {owner ? (
-          <>
-            <button onClick={() => setTab('members')}>Nhân viên / lời mời</button>
-            <button onClick={() => setTab('profile')}>Thông tin tổ chức</button>
-            <button onClick={() => setTab('locations')}>Địa điểm</button>
-          </>
-        ) : null}
-      </nav>
-      {tab === 'drivers' ? <Drivers id={membership.organizationId} role={membership.role} /> : null}
-      {tab === 'vehicles' ? (
-        <Vehicles id={membership.organizationId} role={membership.role} />
-      ) : null}
-      {tab === 'members' && owner ? <Members id={membership.organizationId} /> : null}
-      {tab === 'profile' && owner ? <OrganizationProfile id={membership.organizationId} /> : null}
-      {tab === 'locations' && owner ? (
-        <LocationsPage organizationId={membership.organizationId} />
-      ) : null}
-    </section>
-  );
-}
-function Members({ id }: { id: string }) {
+export function OrganizationMembers({ id }: { id: string }) {
   const [page, setPage] = useState(1);
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('Dispatcher');
@@ -147,7 +110,7 @@ function Members({ id }: { id: string }) {
     </section>
   );
 }
-function Drivers({ id, role }: { id: string; role: string }) {
+export function OrganizationDrivers({ id, role }: { id: string; role: string }) {
   const [page, setPage] = useState(1);
   const [email, setEmail] = useState('');
   const [selected, setSelected] = useState<string>();
@@ -228,7 +191,7 @@ function Drivers({ id, role }: { id: string; role: string }) {
     </section>
   );
 }
-function Vehicles({ id, role }: { id: string; role: string }) {
+export function OrganizationVehicles({ id, role }: { id: string; role: string }) {
   const load = useCallback((signal: AbortSignal) => foundationApi.vehicles(id, signal), [id]);
   const state = useFoundation(load);
   return (
@@ -332,14 +295,22 @@ function VehicleCard({
     </article>
   );
 }
-function OrganizationProfile({ id }: { id: string }) {
+export function OrganizationProfile({ id, onSaved }: { id: string; onSaved?: () => void }) {
   const load = useCallback((signal: AbortSignal) => foundationApi.organization(id, signal), [id]);
   const state = useFoundation(load);
   if (state.loading) return <Loading />;
   if (state.error) return <ErrorNotice error={state.error} retry={state.reload} />;
   if (!state.data) return null;
   return (
-    <OrganizationProfileForm organization={state.data} busy={state.busy} mutate={state.mutate} />
+    <OrganizationProfileForm
+      organization={state.data}
+      busy={state.busy}
+      mutate={async (action) => {
+        const saved = await state.mutate(action);
+        if (saved) onSaved?.();
+        return saved;
+      }}
+    />
   );
 }
 function OrganizationProfileForm({

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Organization } from '../models/organization';
 import { useApplication } from '../hooks/useApplication';
 import { ErrorNotice } from '../../../shared/ui';
+import { ServiceTypePicker } from '../../transport/components/ServiceTypePicker';
 export function LegacyApplication({
   organization,
   reload,
@@ -13,6 +14,7 @@ export function LegacyApplication({
   const [name, setName] = useState(organization.name);
   const [number, setNumber] = useState(organization.registrationNumber);
   const [email, setEmail] = useState(organization.ownerEmail);
+  const [types, setTypes] = useState<string[]>(organization.requestedServiceTypes ?? []);
   return (
     <section className="panel">
       <h2>Hồ sơ nộp thay / hồ sơ cũ</h2>
@@ -20,7 +22,7 @@ export function LegacyApplication({
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            void state.submit(name, number, organization.id, email);
+            if (types.length) void state.submit(name, number, types, organization.id, email);
           }}
         >
           <label>
@@ -45,7 +47,8 @@ export function LegacyApplication({
             Email nhận Owner
             <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </label>
-          <button className="button primary" disabled={state.busy}>
+          <ServiceTypePicker value={types} onChange={setTypes} />
+          <button className="button primary" disabled={state.busy || !types.length}>
             Sửa và nộp lại
           </button>
         </form>

@@ -7,17 +7,26 @@ export function useApplication(reload: () => void) {
   async function submit(
     name: string,
     registrationNumber: string,
+    requestedServiceTypes: string[],
     id?: string,
     ownerEmail?: string,
   ) {
-    if (busy) return;
+    if (busy) return false;
     setBusy(true);
     setError(null);
     try {
-      await organizationsApi.submit(name, registrationNumber, id, ownerEmail);
+      await organizationsApi.submit(
+        name,
+        registrationNumber,
+        requestedServiceTypes,
+        id,
+        ownerEmail,
+      );
       reload();
+      return true;
     } catch (failure) {
       setError(failure);
+      return false;
     } finally {
       setBusy(false);
     }

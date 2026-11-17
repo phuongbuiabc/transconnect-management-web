@@ -6,6 +6,7 @@ import { useOrganization } from '../hooks/useOrganization';
 import { ReviewHistory } from '../../foundation/components/ReviewHistory';
 import { AdminVehicleLink } from '../../foundation/components/AdminVehicleLink';
 import { LegacyApplication } from '../components/LegacyApplication';
+import { serviceTypeLabel } from '../../transport/models/transport';
 export function OrganizationDetail() {
   const { id } = useParams();
   const {
@@ -62,6 +63,26 @@ export function OrganizationDetail() {
                   <dt>Email chủ sở hữu</dt>
                   <dd>
                     <a href={'mailto:' + item.ownerEmail}>{item.ownerEmail}</a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Dịch vụ dự định khai thác</dt>
+                  <dd>
+                    {item.requestedServiceTypes?.length
+                      ? item.requestedServiceTypes.map(serviceTypeLabel).join(', ')
+                      : 'Chưa khai báo'}
+                    {item.reviewStatus === 'Approved' ? (
+                      <>
+                        {' · '}
+                        <Link
+                          to={
+                            '/admin/services?search=' + encodeURIComponent(item.registrationNumber)
+                          }
+                        >
+                          Xem đăng ký dịch vụ
+                        </Link>
+                      </>
+                    ) : null}
                   </dd>
                 </div>
                 <div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useAccountSettings } from '../hooks/useAccountSettings';
 import { ErrorNotice } from '../../../shared/ui';
-export function AccountSettings() {
+export function AccountSettings({ defaultOpen = false }: { defaultOpen?: boolean }) {
   const auth = useAuth();
   const state = useAccountSettings();
   const [name, setName] = useState(auth.user?.fullName || '');
@@ -11,7 +11,7 @@ export function AccountSettings() {
   const [next, setNext] = useState('');
   const [file, setFile] = useState<File>();
   return (
-    <details className="panel">
+    <details className="panel" open={defaultOpen}>
       <summary>Thông tin tài khoản / đổi mật khẩu</summary>
       {auth.user?.avatarUrl ? (
         <img src={auth.user.avatarUrl} alt="Ảnh đại diện" width="80" height="80" />

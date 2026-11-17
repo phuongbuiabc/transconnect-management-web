@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { NavLink, Navigate, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { Brand } from '../../../shared/ui';
 import { Icon } from '../../../shared/ui/Icon';
@@ -20,8 +20,6 @@ export function LoginPage({ portal }: { portal: 'InternalAdmin' | 'Operator' }) 
   const [systemAccountId, setSystemAccountId] = useState(systemAccounts[0].id);
   const [password, setPassword] = useState('');
   const accountGroup = portal;
-  const [registering, setRegistering] = useState(false);
-  const [fullName, setFullName] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<unknown>(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -32,14 +30,8 @@ export function LoginPage({ portal }: { portal: 'InternalAdmin' | 'Operator' }) 
   const isPartner = accountGroup === 'Operator';
   const systemAccount = systemAccounts.find((account) => account.id === systemAccountId);
   const accountUnavailable = !isPartner && !systemAccount?.email;
-  const heading = registering
-    ? 'Tạo tài khoản đối tác'
-    : isPartner
-      ? 'Đăng nhập doanh nghiệp'
-      : 'Đăng nhập hệ thống';
-  const action = registering ? 'Tạo tài khoản' : 'Đăng nhập';
+  const heading = isPartner ? 'Đăng nhập doanh nghiệp' : 'Đăng nhập hệ thống';
   const fieldNames: Record<string, { id: string; label: string }> = {
-    fullname: { id: 'full-name', label: 'Họ tên' },
     email: { id: 'email', label: isPartner ? 'Email' : 'Tài khoản' },
     password: { id: 'password', label: 'Mật khẩu' },
   };
@@ -66,8 +58,7 @@ export function LoginPage({ portal }: { portal: 'InternalAdmin' | 'Operator' }) 
     setBusy(true);
     setError(null);
     try {
-      if (registering) await auth.register(email.trim(), password, fullName);
-      else await auth.signIn(loginEmail, password, accountGroup);
+      await auth.signIn(loginEmail, password, accountGroup);
       navigate(accountGroup === 'Operator' ? '/partner' : '/admin', {
         replace: true,
       });
@@ -146,11 +137,9 @@ export function LoginPage({ portal }: { portal: 'InternalAdmin' | 'Operator' }) 
             </div>
             <h1 id="login-title">{heading}</h1>
             <p>
-              {registering
-                ? 'Tạo tài khoản để bắt đầu đăng ký đơn vị vận tải trên VieGo.'
-                : isPartner
-                  ? 'Truy cập không gian làm việc dành cho đối tác vận tải.'
-                  : 'Chọn tài khoản quản trị và nhập mật khẩu để tiếp tục.'}
+              {isPartner
+                ? 'Truy cập không gian làm việc dành cho đối tác vận tải.'
+                : 'Chọn tài khoản quản trị và nhập mật khẩu để tiếp tục.'}
             </p>
             <form onSubmit={submit} aria-busy={busy}>
               {error ? (
@@ -161,7 +150,7 @@ export function LoginPage({ portal }: { portal: 'InternalAdmin' | 'Operator' }) 
                   tabIndex={-1}
                   ref={errorRef}
                 >
-                  <strong>Chưa thể {registering ? 'tạo tài khoản' : 'đăng nhập'}</strong>
+                  <strong>Chưa thể đăng nhập</strong>
                   <p>{errorMessage(error)}</p>
                   {Object.keys(fieldErrors).length ? (
                     <ul>
@@ -181,25 +170,6 @@ export function LoginPage({ portal }: { portal: 'InternalAdmin' | 'Operator' }) 
                       })}
                     </ul>
                   ) : null}
-                </div>
-              ) : null}
-              {registering ? (
-                <div className="login-field">
-                  <label htmlFor="full-name">Họ tên</label>
-                  <input
-                    id="full-name"
-                    autoComplete="name"
-                    disabled={busy}
-                    required
-                    maxLength={200}
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    aria-invalid={messagesFor('fullName').length ? true : undefined}
-                    aria-describedby={
-                      messagesFor('fullName').length ? 'full-name-error' : undefined
-                    }
-                  />
-                  {inlineError('fullName', 'full-name-error')}
                 </div>
               ) : null}
               <label htmlFor="email">{isPartner ? 'Email doanh nghiệp' : 'Tài khoản'}</label>
@@ -263,7 +233,7 @@ export function LoginPage({ portal }: { portal: 'InternalAdmin' | 'Operator' }) 
                 <input
                   id="password"
                   type={passwordVisible ? 'text' : 'password'}
-                  autoComplete={registering ? 'new-password' : 'current-password'}
+                  autoComplete="current-password"
                   required
                   placeholder="Nhập mật khẩu"
                   value={password}
@@ -290,34 +260,19 @@ export function LoginPage({ portal }: { portal: 'InternalAdmin' | 'Operator' }) 
                 className="button primary login-submit"
                 disabled={busy || accountUnavailable}
               >
-                {busy ? (registering ? 'Đang tạo tài khoản…' : 'Đang đăng nhập…') : action}
+                {busy ? 'Đang đăng nhập…' : 'Đăng nhập'}
                 <Icon name="arrow" />
               </button>
               <span className="sr-only" role="status">
-                {busy
-                  ? registering
-                    ? 'Đang tạo tài khoản, vui lòng chờ.'
-                    : 'Đang đăng nhập, vui lòng chờ.'
-                  : ''}
+                {busy ? 'Đang đăng nhập, vui lòng chờ.' : ''}
               </span>
             </form>
             {isPartner ? (
               <div className="access-register">
-                <span>
-                  {registering ? 'Đã có tài khoản đối tác?' : 'Chưa có tài khoản đối tác?'}
-                </span>
-                <button
-                  type="button"
-                  className="text-link"
-                  disabled={busy}
-                  onClick={() => {
-                    setRegistering(!registering);
-                    setError(null);
-                    setPasswordVisible(false);
-                  }}
-                >
-                  {registering ? 'Đăng nhập' : 'Tạo tài khoản'}
-                </button>
+                <span>Chưa có tài khoản đối tác?</span>
+                <Link className="text-link" to="/partner/register">
+                  Đăng ký đối tác
+                </Link>
               </div>
             ) : null}
             <p className="session-note">
@@ -326,9 +281,7 @@ export function LoginPage({ portal }: { portal: 'InternalAdmin' | 'Operator' }) 
             </p>
             <p className="login-help">
               {isPartner
-                ? registering
-                  ? 'Sau khi tạo tài khoản, xác thực email để tiếp tục nộp hồ sơ đơn vị vận tải.'
-                  : 'Dùng tài khoản đối tác để quản lý hồ sơ và các đơn vị bạn tham gia.'
+                ? 'Dùng tài khoản đối tác để quản lý hồ sơ và các đơn vị bạn tham gia.'
                 : 'Tài khoản quản trị được cấp bởi hệ thống. Liên hệ người phụ trách nếu bạn cần hỗ trợ truy cập.'}
             </p>
           </div>

@@ -13,4 +13,5 @@ export interface Organization {
   contactPhone?: string | null;
   contactEmail?: string | null;
   isProfileComplete?: boolean;
+  requestedServiceTypes?: string[] | null;
 }
