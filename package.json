@@ -8,7 +8,7 @@
     "build": "tsc --noEmit && vite build --configLoader runner",
     "typecheck": "tsc --noEmit",
     "preview": "vite preview",
-    "test": "node --test tests/api.test.mjs tests/persistence.test.mjs tests/partner.test.mjs tests/transport.test.mjs tests/registration.test.mjs",
+    "test": "node --test tests/api.test.mjs tests/persistence.test.mjs tests/partner.test.mjs tests/transport.test.mjs tests/registration.test.mjs tests/trips.test.mjs tests/booking.test.mjs",
     "check:ui": "node scripts/check-ui.mjs",
     "lint": "eslint .",
     "format": "prettier --write src tests scripts *.ts *.js *.json",

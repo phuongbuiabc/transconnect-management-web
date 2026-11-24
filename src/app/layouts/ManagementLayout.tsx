@@ -12,6 +12,9 @@ const destinations: { path: string; label: string; permission: string; icon: Ico
   },
   { path: 'drivers', label: 'Tài xế', permission: 'organizations.manage', icon: 'drivers' },
   { path: 'services', label: 'Dịch vụ', permission: 'services.review', icon: 'shield' },
+  { path: 'trips', label: 'Chuyến', permission: 'services.review', icon: 'vehicle' },
+  { path: 'bookings', label: 'Đặt chỗ', permission: 'services.review', icon: 'check' },
+  { path: 'station', label: 'Bến xe (mô phỏng)', permission: 'stations.confirm', icon: 'check' },
   { path: 'locations', label: 'Địa điểm', permission: 'locations.manage', icon: 'locations' },
   { path: 'accounts', label: 'Tài khoản', permission: 'users.manage', icon: 'accounts' },
 ];

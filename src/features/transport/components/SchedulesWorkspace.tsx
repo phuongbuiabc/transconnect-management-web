@@ -3,6 +3,7 @@ import { ErrorNotice, Loading } from '../../../shared/ui';
 import { EmptyRecords } from '../../../shared/ui/RecordLayout';
 import type { Vehicle } from '../../foundation/models/foundation';
 import { transportApi } from '../api/transportApi';
+import { tripsApi } from '../api/tripsApi';
 import { useSchedules } from '../hooks/useTransport';
 import {
   emptySchedule,
@@ -237,6 +238,21 @@ export function SchedulesWorkspace({
                             }
                           >
                             Thay lịch
+                          </button>
+                        ) : null}
+                        {canOperate && schedule.status === 'Active' ? (
+                          <button
+                            type="button"
+                            className="button secondary"
+                            disabled={state.busy}
+                            title="Sinh chuyến cho 14 ngày tới; ngày đã có chuyến được bỏ qua"
+                            onClick={() =>
+                              void state.mutate(() =>
+                                tripsApi.generate(organizationId, schedule.id),
+                              )
+                            }
+                          >
+                            Sinh chuyến ngay
                           </button>
                         ) : null}
                         {schedule.status === 'Active' ? (

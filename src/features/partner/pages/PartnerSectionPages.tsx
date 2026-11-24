@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate, useSearchParams } from 'react-router-dom';
 import { Loading } from '../../../shared/ui';
 import { PageHeader } from '../../../shared/ui/RecordLayout';
 import { AccountSettings } from '../../auth/pages/AccountSettings';
@@ -10,10 +10,12 @@ import {
   OrganizationVehicles,
 } from '../../foundation/components/OrganizationSections';
 import { LocationsPage } from '../../locations/pages/LocationsPage';
+import { BookingsWorkspace } from '../../booking/components/BookingsWorkspace';
 import { CoachGate } from '../../transport/components/CoachGate';
 import { FaresWorkspace } from '../../transport/components/FaresWorkspace';
 import { RoutesWorkspace } from '../../transport/components/RoutesWorkspace';
 import { SchedulesWorkspace } from '../../transport/components/SchedulesWorkspace';
+import { TripsWorkspace } from '../../transport/components/TripsWorkspace';
 import { SeatLayoutsWorkspace } from '../../transport/components/SeatLayoutsWorkspace';
 import { ServiceRegistrations } from '../../transport/components/ServiceRegistrations';
 import { usePartner } from '../hooks/usePartner';
@@ -150,6 +152,50 @@ export function PartnerSchedulesPage() {
       {(id) => (
         <CoachGate key={id} organizationId={id}>
           {(canOperate) => <SchedulesWorkspace organizationId={id} canOperate={canOperate} />}
+        </CoachGate>
+      )}
+    </MemberPage>
+  );
+}
+
+export function PartnerTripsPage() {
+  const [params] = useSearchParams();
+  const initialTripId = params.get('trip');
+  return (
+    <MemberPage
+      title="Chuyến"
+      description="Chuyến theo ngày, phân công xe/tổ lái và lệnh vận chuyển"
+    >
+      {(id) => (
+        <CoachGate key={id} organizationId={id}>
+          {(canOperate) => (
+            <TripsWorkspace
+              key={initialTripId ?? ''}
+              organizationId={id}
+              canOperate={canOperate}
+              initialTripId={initialTripId}
+            />
+          )}
+        </CoachGate>
+      )}
+    </MemberPage>
+  );
+}
+
+export function PartnerBookingsPage() {
+  const partner = usePartner();
+  const navigate = useNavigate();
+  return (
+    <MemberPage title="Đặt chỗ" description="Yêu cầu chờ duyệt và chính sách giữ chỗ, hủy vé">
+      {(id) => (
+        <CoachGate key={id} organizationId={id}>
+          {() => (
+            <BookingsWorkspace
+              organizationId={id}
+              isOwner={partner.isOwner}
+              onOpenTrip={(tripId) => navigate('/partner/trips?trip=' + encodeURIComponent(tripId))}
+            />
+          )}
         </CoachGate>
       )}
     </MemberPage>

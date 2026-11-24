@@ -1,0 +1,107 @@
+/* M4a — đặt chỗ phía nhà xe. Dùng chung token và lưới ghế của transport.css. */
+.booking-section {
+  display: grid;
+  gap: 12px;
+}
+.booking-summary {
+  margin: 0;
+}
+.booking-seat {
+  position: relative;
+  display: grid;
+  line-height: 1.1;
+}
+.booking-seat small {
+  font-size: 9px;
+  font-weight: 500;
+  max-width: 4.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.booking-seat.is-viego::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+}
+.booking-seat.seat-taken {
+  background: #e7ecf3;
+  border-color: #b9c3d1;
+  color: #333d4a;
+}
+.booking-seat.seat-notforsale {
+  background: #eef0f3;
+  border-style: dashed;
+  color: var(--muted);
+}
+.booking-seat.is-picked::after {
+  background: #fff;
+}
+.booking-walkin {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fafbfc;
+}
+.booking-walkin h4,
+.booking-list-head h4 {
+  margin: 0;
+  font-size: 14px;
+}
+.booking-list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.booking-table td {
+  vertical-align: top;
+}
+.booking-table small {
+  color: var(--muted);
+}
+.booking-table tr.is-selected td {
+  background: #fff8e7;
+}
+.booking-detail td {
+  background: #fafbfc;
+}
+.booking-detail p {
+  margin: 2px 0;
+}
+.booking-actions {
+  white-space: nowrap;
+}
+.booking-actions .button + .button {
+  margin-left: 6px;
+}
+.link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--red-dark);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.policy-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 12px;
+}
+.policy-form label {
+  display: grid;
+  gap: 4px;
+}
+.policy-form small {
+  color: var(--muted);
+  font-weight: 400;
+}

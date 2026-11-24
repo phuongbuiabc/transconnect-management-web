@@ -7,6 +7,7 @@ import { OrganizationDetail } from '../features/organizations/pages/Organization
 import { AccountsPage } from '../features/accounts/pages/AccountsPage';
 import { DriversPage } from '../features/foundation/pages/DriversPage';
 import { PartnerLayout } from './layouts/PartnerLayout';
+import { AdminBookingsPage } from '../features/booking/pages/AdminBookingsPage';
 import { PartnerOverviewPage } from '../features/partner/pages/PartnerOverviewPage';
 import { PartnerApplicationPage } from '../features/partner/pages/PartnerApplicationPage';
 import { PartnerInvitationsPage } from '../features/partner/pages/PartnerInvitationsPage';
@@ -22,6 +23,8 @@ import {
   PartnerSchedulesPage,
   PartnerSeatLayoutsPage,
   PartnerServicesPage,
+  PartnerTripsPage,
+  PartnerBookingsPage,
   PartnerVehiclesPage,
 } from '../features/partner/pages/PartnerSectionPages';
 import { useAuth } from '../features/auth/hooks/useAuth';
@@ -30,6 +33,11 @@ import {
   AdminServiceDetailPage,
   AdminServicesPage,
 } from '../features/transport/pages/AdminServicesPage';
+import {
+  AdminTripsPage,
+  OrderVerifyPage,
+  StationPage,
+} from '../features/transport/pages/AdminTripsPage';
 function AdminLanding() {
   const auth = useAuth();
   return (
@@ -41,7 +49,9 @@ function AdminLanding() {
             ? 'services'
             : auth.user?.permissions.includes('users.manage')
               ? 'accounts'
-              : 'locations'
+              : auth.user?.permissions.includes('stations.confirm')
+                ? 'station'
+                : 'locations'
       }
       replace
     />
@@ -54,6 +64,7 @@ export default function App() {
       <Route path="/login/admin" element={<LoginPage key="admin" portal="InternalAdmin" />} />
       <Route path="/login/partner" element={<LoginPage key="partner" portal="Operator" />} />
       <Route path="/partner/register" element={<PartnerRegisterPage />} />
+      <Route path="/verify/:code" element={<OrderVerifyPage />} />
       <Route path="/partner" element={<PartnerLayout />}>
         <Route index element={<PartnerOverviewPage />} />
         <Route path="application" element={<PartnerApplicationPage />} />
@@ -67,6 +78,8 @@ export default function App() {
         <Route path="routes" element={<PartnerRoutesPage />} />
         <Route path="seat-layouts" element={<PartnerSeatLayoutsPage />} />
         <Route path="schedules" element={<PartnerSchedulesPage />} />
+        <Route path="trips" element={<PartnerTripsPage />} />
+        <Route path="bookings" element={<PartnerBookingsPage />} />
         <Route path="fares" element={<PartnerFaresPage />} />
         <Route path="account" element={<PartnerAccountPage />} />
         <Route path="*" element={<Navigate to="/partner" replace />} />
@@ -81,6 +94,9 @@ export default function App() {
           <Route path="locations" element={<LocationsPage />} />
           <Route path="services" element={<AdminServicesPage />} />
           <Route path="services/:id" element={<AdminServiceDetailPage />} />
+          <Route path="trips" element={<AdminTripsPage />} />
+          <Route path="bookings" element={<AdminBookingsPage />} />
+          <Route path="station" element={<StationPage />} />
         </Route>
       </Route>
       <Route path="/" element={<Navigate to="/admin" replace />} />

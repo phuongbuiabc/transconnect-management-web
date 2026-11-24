@@ -257,3 +257,29 @@ button.seat-cell {
     flex: 1 1 120px;
   }
 }
+
+.trip-filters {
+  display: grid;
+  gap: 0.75rem;
+}
+.trip-day {
+  display: grid;
+  gap: 0.5rem;
+}
+.trip-day h3 {
+  margin: 0.5rem 0 0;
+}
+.order-snapshot {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 0.25rem 1rem;
+  margin: 0.5rem 0;
+}
+.order-snapshot dt {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+.order-snapshot dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}

@@ -4,6 +4,7 @@ import { useFoundation } from '../../foundation/hooks/useFoundation';
 import { locationsApi } from '../../locations/api/locationsApi';
 import type { SharedLocation } from '../../locations/models/location';
 import { transportApi } from '../api/transportApi';
+import { tripsApi, type TripFilter } from '../api/tripsApi';
 import { coachAccess } from '../models/scheduleRules';
 
 /** Đăng ký dịch vụ của tổ chức + danh mục loại dịch vụ. */
@@ -180,4 +181,81 @@ export function useSharedLocationSearch(query: string) {
     };
   }, [query]);
   return { items, loading, error };
+}
+
+/** Chuyến theo khoảng ngày + dữ liệu chọn tuyến/xe/tài xế cho phân công. */
+export function useTrips(organizationId: string, filter: TripFilter) {
+  const { from, to, routeId, status, unassigned } = filter;
+  const load = useCallback(
+    async (signal: AbortSignal) => {
+      const [trips, routes, vehicles, attached, drivers] = await Promise.all([
+        tripsApi.list(organizationId, { from, to, routeId, status, unassigned }, signal),
+        transportApi.routes(organizationId, signal),
+        foundationApi.vehicles(organizationId, signal),
+        transportApi.vehicleLayouts(organizationId, signal),
+        activeDrivers(organizationId, signal),
+      ]);
+      const withLayout = new Set(attached.map((a) => a.vehicleId));
+      return {
+        trips,
+        routes,
+        vehicles: vehicles.filter(
+          (v) => !v.endedAt && !v.isSuspended && withLayout.has(v.vehicleId),
+        ),
+        drivers,
+      };
+    },
+    [organizationId, from, to, routeId, status, unassigned],
+  );
+  return useFoundation(load);
+}
+
+/** Tài xế đang cộng tác (đã nhận lời mời, chưa kết thúc) — đọc tối đa 10 trang. */
+async function activeDrivers(organizationId: string, signal: AbortSignal) {
+  const items = [];
+  for (let page = 1; page <= 10; page++) {
+    const result = await foundationApi.engagements(organizationId, page, signal);
+    items.push(...result.items);
+    if (page >= result.totalPages) break;
+  }
+  return items
+    .filter((e) => e.acceptedAt && !e.endedAt && !e.revokedAt)
+    .map((e) => ({ driverId: e.driverId, fullName: e.fullName }));
+}
+
+export function useTripDetail(organizationId: string, tripId: string) {
+  const load = useCallback(
+    async (signal: AbortSignal) => {
+      const [trip, order] = await Promise.all([
+        tripsApi.get(organizationId, tripId, signal),
+        tripsApi.order(organizationId, tripId, signal),
+      ]);
+      return { trip, order };
+    },
+    [organizationId, tripId],
+  );
+  return useFoundation(load);
+}
+
+export function useAdminTrips(from: string, to: string, status: string) {
+  const load = useCallback(
+    (signal: AbortSignal) => tripsApi.adminList(from, to, status, signal),
+    [from, to, status],
+  );
+  return useFoundation(load);
+}
+
+/** Bến xe mô phỏng: tra lệnh theo số; chuỗi rỗng thì không gọi API. */
+export function useStationOrder(number: string) {
+  const load = useCallback(
+    (signal: AbortSignal) =>
+      number ? tripsApi.stationFind(number, signal) : Promise.resolve(null),
+    [number],
+  );
+  return useFoundation(load);
+}
+
+export function useOrderVerification(code: string) {
+  const load = useCallback((signal: AbortSignal) => tripsApi.verify(code, signal), [code]);
+  return useFoundation(load);
 }

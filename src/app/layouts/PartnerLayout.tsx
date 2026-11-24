@@ -43,6 +43,8 @@ function PartnerShell() {
           { path: '/partner/routes', label: 'Tuyến', icon: 'locations' },
           { path: '/partner/seat-layouts', label: 'Sơ đồ ghế', icon: 'vehicle' },
           { path: '/partner/schedules', label: 'Lịch chạy', icon: 'document' },
+          { path: '/partner/trips', label: 'Chuyến', icon: 'vehicle' },
+          { path: '/partner/bookings', label: 'Đặt chỗ', icon: 'check' },
           { path: '/partner/fares', label: 'Bảng giá', icon: 'document' },
         );
       if (partner.isOwner)
